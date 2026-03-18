@@ -38,15 +38,18 @@ export default function LocationInput({
 
         if (!autoCompleteRef.current) return;
         autoCompleteRef.current.addListener('place_changed', () => {
-            const autocomplete = autoCompleteRef.current;
-            if (!autocomplete) return;
-            const place = autocomplete.getPlace();
-            if (place) {
-                const addr = place.formatted_address || '';
-                setInternalValue(addr);
-                onValueChange?.(addr);
-                onPlaceSelected(place);
-            }
+        const autocomplete = autoCompleteRef.current;
+        if (!autocomplete) return;
+        const place = autocomplete.getPlace() as google.maps.places.PlaceResult & { name?: string };
+        if (place) {
+            const displayValue = place.name
+            ? `${place.name}, ${place.formatted_address}`
+            : place.formatted_address || '';
+
+            setInternalValue(displayValue);
+            onValueChange?.(displayValue);
+            onPlaceSelected(place);
+        }
         });
 
         return () => {
