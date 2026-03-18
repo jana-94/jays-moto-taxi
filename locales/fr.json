@@ -1,0 +1,327 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "services": "Services",
+    "pricing": "Tarifs",
+    "reservation": "Réservation",
+    "contact": "Contact",
+    "select_language": "Choisir la langue",
+    "slogan": "Le temps est précieux, tout comme vous"
+  },
+  "hero": {
+    "slides": [
+      {
+        "title": "Services de Mototaxi Rapides & Sûrs",
+        "subtitle": "Naviguez en ville avec facilité. Disponible 24/7 pour vos trajets quotidiens et urgents."
+      },
+      {
+        "title": "Vitesse • Ponctualité • Tranquillité d'esprit",
+        "subtitle": "Jay’s Taxi Moto – 24/7 – Paris & Île-de-France"
+      },
+      {
+        "title": "Flotte Executive",
+        "subtitle": "Voyagez avec confort et élégance. Nos chauffeurs professionnels vous accompagnent partout, que ce soit pour vos rendez-vous d’affaires ou vos déplacements privés."
+      }
+    ],
+    "book_ride": "Réserver une course",
+    "our_services": "Nos Services"
+  },
+  "pricing": {
+    "title": "Nos Tarifs",
+    "subtitle": "Des tarifs transparents pour vos trajets.",
+    "table_headers": {
+      "route": "Trajet",
+      "price": "Prix (€)"
+    },
+    "routes": {
+      "paris_paris": "Paris - Paris",
+      "paris_orly": "Paris - Orly",
+      "paris_cdg": "Paris - CDG",
+      "orly_cdg": "Orly - CDG",
+      "paris_bourget": "Paris - Bourget",
+      "paris_inner_suburbs": "Paris - Petite Couronne",
+      "la_defense_cdg": "La Défense - CDG",
+      "la_defense_orly": "La Défense - Orly"
+    }
+  },
+  "reservation": {
+    "brand_title": "Jay’s Taxi Moto",
+    "main_title": "Un service de transport de qualité, 24/7 !",
+    "inquiries_text": "Pour toute demande, n'hésitez pas à nous écrire.",
+    "form_title": "Réservez votre moto",
+    "subtitle": "Réserver une course en quelques secondes !",
+    "labels": {
+      "start_address": "Adresse de départ",
+      "end_address": "Adresse d'arrivée",
+      "date_time": "Date et heure aller",
+      "luggage": "Bagagère (Bagage soute)",
+      "one_way": "Aller simple",
+      "round_trip": "Aller-retour"
+    },
+    "placeholders": {
+      "location": "Indiquez un lieu"
+    },
+    "submit": "Estimation du tarif",
+    "map_loading": "Chargement de la carte…",
+    "map_no_key": "Clé API Google Maps non configurée.",
+    "route_info_label": "Infos itinéraire",
+    "luggage_max": "(max 1)",
+    "time_label": "Heure",
+    "estimated_fare": "Tarif estimé",
+    "fare_breakdown": "Base €25 + {{km}} km × €2{{luggage}}{{round_trip}}",
+    "fare_luggage": " + €20 bagage",
+    "fare_round_trip": " × 2 (aller-retour)",
+    "book_now": "Réserver maintenant",
+    "step2_title": "Finalisez votre réservation",
+    "step2_subtitle": "Entrez vos coordonnées pour confirmer la réservation.",
+    "back_to_estimator": "← Retour à l'estimation",
+    "service_type": "Type de trajet",
+    "single_trip": "Aller simple",
+    "round_trip_label": "Aller-retour",
+    "date_pickup": "Date de prise en charge",
+    "time_pickup": "Heure de prise en charge",
+    "luggage_count": "Nombre de bagages",
+    "your_name": "Votre nom",
+    "your_name_placeholder": "Jean Dupont",
+    "email_address": "Adresse e-mail",
+    "email_placeholder": "vous@exemple.com",
+    "mobile_number": "Numéro de mobile",
+    "mobile_placeholder": "+33 6 XX XX XX XX",
+    "description": "Description (si nécessaire)",
+    "description_placeholder": "Instructions spéciales ou remarques…",
+    "sending": "Envoi en cours…",
+    "booking_sent": "Réservation envoyée ✓",
+    "success_msg": "Demande de réservation envoyée ! Nous vous contacterons sous peu.",
+    "error_msg": "Une erreur s'est produite. Veuillez réessayer ou nous appeler directement.",
+    "fare_summary_label": "Tarif estimé"
+  },
+  "footer": {
+    "description": "Stratégie, design et technologie pour accélérer la croissance des entreprises.",
+    "navigation": "Navigation",
+    "newsletter": "Newsletter",
+    "newsletter_subtitle": "Abonnez-vous pour des infos et mises à jour.",
+    "email_placeholder": "Votre email",
+    "subscribe_btn": "S'abonner",
+    "legal": "Mentions Légales",
+    "privacy": "Politique de Confidentialité",
+    "terms": "Conditions d'Utilisation",
+    "rights": "© {{year}} Muse Business. Tous droits réservés.",
+    "footer_title": "Jay's Transport",
+    "rightsreserved": "Tous droits réservés.",
+    "whatsapp": "WhatsApp"
+  },
+  "contact_form": {
+    "labels": {
+      "name": "Nom",
+      "email": "Email",
+      "message": "Message"
+    },
+    "placeholders": {
+      "name": "Votre nom",
+      "email": "vous@exemple.com",
+      "message": "Comment pouvons-nous vous aider ?"
+    },
+    "errors": {
+      "name_required": "Le nom est requis",
+      "email_required": "Un email valide est requis",
+      "message_min": "Veuillez entrer au moins 10 caractères",
+      "submit_failed": "L'envoi a échoué. Veuillez réessayer plus tard."
+    },
+    "submit": "Envoyer le message",
+    "sending": "Envoi en cours…",
+    "success": "Merci ! Nous vous répondrons sous peu."
+  },
+  "services_page": {
+    "hero_title": "Nos Services Premium",
+    "hero_subtitle": "Disponible 24/7 pour tous vos trajets à Paris et en Île-de-France.",
+    "speed_flexibility_title": "La Vitesse avant la Flexibilité",
+    "speed_flexibility_text_1": "Disponible 24 heures sur 24, 7 jours sur 7, Jay’s Taxi Moto vous accompagne pour tous vos déplacements à Paris et en région Île-de-France.",
+    "speed_flexibility_text_2": "Nous fournissons un service professionnel, ponctuel et sécurisé, conçu pour vous faire gagner du temps tout en assurant un confort exceptionnel et une hygiène impeccable.",
+    "speed_flexibility_text_3": "Nos chauffeurs maîtrisent parfaitement la circulation urbaine, assurant un trajet fluide, sûr et sans stress — même aux heures de pointe.",
+    "speed_flexibility_text_4": "Le Taxi Moto est la solution la plus rapide pour vos rendez-vous d'affaires, transferts gares et aéroports, ou déplacements urgents à Paris.",
+    "equipment_title": "Notre Équipement",
+    "maintenance_title": "Entretien rigoureux des véhicules pour une sécurité optimale",
+    "maintenance_text": "La sécurité est notre priorité absolue. Nous respectons des calendriers d'entretien stricts pour tous nos véhicules afin de garantir qu'ils sont toujours en parfait état. Chaque moto subit des inspections régulières des freins, pneus, feux et performances moteur.",
+    "maintenance_points": [
+      "Inspections de sécurité régulières",
+      "Mécaniciens certifiés",
+      "Pièces et fluides premium"
+    ],
+    "luggage_title": "Option Bagages",
+    "luggage_text_1": "Une option bagage est disponible pour le transport de bagages en soute jusqu'à 25 kg, avec un supplément de 20 € ajouté au prix de la course.",
+    "luggage_text_2": "Veuillez préciser cette option dans la section commentaires lors de votre réservation.",
+    "parcel_title": "Livraison de Colis",
+    "parcel_text_1": "Nous proposons également des services de livraison de colis et de documents, disponibles sur devis.",
+    "parcel_text_2": "Notre service de livraison garantit une manipulation rapide et sécurisée, adaptée à vos besoins, tant pour les particuliers que pour les professionnels.",
+    "cta_title": "Prêt à réserver votre trajet ?",
+    "cta_subtitle": "Découvrez le moyen le plus rapide et le plus confortable de voyager à Paris.",
+    "cta_button": "Contactez-nous maintenant",
+    "alts": {
+      "taxi_service": "Service de Taxi",
+      "vehicle_maintenance": "Entretien du Véhicule",
+      "luggage_option": "Option Bagages",
+      "parcel_delivery": "Livraison de Colis"
+    }
+  },
+  "contact_page": {
+    "hero_title": "Contactez-nous",
+    "hero_subtitle": "Nous sommes là pour vous aider 24/7. Contactez-nous pour toute demande.",
+    "questions_title": "Des questions ? Besoin d'aide ? Notre équipe est prête à vous répondre.",
+    "info": {
+      "address_title": "Adresse",
+      "address_text": "8 Avenue des Saules, 91390, Morsang-sur-Orge, France",
+      "hourly_title": "Horaires",
+      "hourly_text": "Lun - Dim Ouvert 24/7",
+      "whatsapp_title": "WhatsApp",
+      "whatsapp_text": "Contactez-nous via WhatsApp !",
+      "email_title": "E-mail",
+      "email_text":"contact@jays-transport.fr"
+    },
+    "form_section_title": "Envoyez-nous un message",
+    "alts": {
+      "contact_us": "Contactez-nous"
+    }
+  },
+  "equipments": {
+    "headset": {
+      "title": "Casque Connecté",
+      "desc": "Casque Bluetooth pour une communication facile et musique."
+    },
+    "charlottes": {
+      "title": "Charlottes Internes",
+      "desc": "Protection hygiénique pour votre confort."
+    },
+    "gloves": {
+      "title": "Gants de Protection",
+      "desc": "Gants de haute qualité pour la sécurité et la chaleur."
+    },
+    "apron": {
+      "title": "Tablier Intégré",
+      "desc": "Protection contre les intempéries pour toutes les saisons."
+    },
+    "jacket": {
+      "title": "Veste et Pantalon",
+      "desc": "Équipement complet pour une sécurité maximale."
+    },
+    "airbag": {
+      "title": "Gilet Airbag",
+      "desc": "Système airbag de sécurité avancé."
+    }
+  },
+  "home_page": {
+    "services": {
+      "title": "Nos Services",
+      "subtitle": "Nous garantissons un service rapide, fiable et sécurisé, offrant un gain de temps réel, une ponctualité sans faille, un confort optimal et des normes d'hygiène strictement respectées.",
+      "items": {
+        "punctuality": {
+          "title": "Ponctualité",
+          "desc": "Nous valorisons votre temps. Nos chauffeurs sont toujours à l'heure pour vous assurer d'arriver à destination sans retard."
+        },
+        "flexibility": {
+          "title": "Flexibilité",
+          "desc": "Adaptable à vos besoins. Que ce soit un changement de dernière minute ou un itinéraire spécifique, nous répondons à vos demandes."
+        },
+        "hygiene": {
+          "title": "Hygiène",
+          "desc": "Propreté immaculée. Nos véhicules sont régulièrement désinfectés et entretenus selon les normes d'hygiène les plus élevées."
+        },
+        "security": {
+          "title": "Sécurité",
+          "desc": "Votre sécurité est notre priorité. Des chauffeurs vérifiés et des trajets suivis assurent un voyage en toute sécurité à chaque fois."
+        },
+        "comfort": {
+          "title": "Confort",
+          "desc": "Roulez avec style et détente. Notre flotte premium offre un confort maximal pour une expérience de voyage agréable."
+        },
+        "professionalism": {
+          "title": "Professionnalisme",
+          "desc": "Un service expert de confiance. Nos chauffeurs courtois et expérimentés fournissent un service de premier ordre."
+        }
+      }
+    },
+    "testimonials": {
+      "title": "Témoignages Clients",
+      "subtitle": "Ce que disent nos passagers de leur trajet.",
+      "items": [
+        {
+          "quote": "Un véritable sauveur ! J'ai évité les embouteillages aux heures de pointe et je suis arrivé à mon vol à CDG avec de l'avance. Professionnel et sûr.",
+          "author": "Fabien.",
+          "role": "Voyageur d'affaires"
+        },
+        {
+          "quote": "Le moyen le plus efficace de se déplacer dans Paris. Le chauffeur était ponctuel, l'équipement était propre et le trajet étonnamment confortable.",
+          "author": "Jerome.",
+          "role": "Consultante"
+        },
+        {
+          "quote": "Un service professionnel du début à la fin. La réservation était simple et le chauffeur a navigué dans les rues avec expertise. A considérablement réduit mon stress quotidien.",
+          "author": "Karin",
+          "role": "Cadre"
+        }
+      ]
+    },
+    "contact": {
+      "title": "Contactez-nous",
+      "subtitle": "Vous avez un projet en tête ? Parlons de la façon dont nous pouvons vous aider à atteindre vos objectifs.",
+      "google_map_title": "Carte Google"
+    }
+  },
+  "portfolio": {
+    "filters": {
+      "all": "Tous",
+      "design": "Design",
+      "product": "Produit",
+      "app": "App"
+    }
+  },
+  "terms": {
+    "title": "Conditions d'utilisation",
+    "content": "Ceci est un modèle de démonstration ; veuillez remplacer ce contenu par les conditions réelles de votre organisation avant le déploiement en production."
+  },
+  "privacy": {
+    "title": "Politique de confidentialité",
+    "content": "Nous respectons votre vie privée. Ceci est un modèle de démonstration ; veuillez remplacer ce contenu par la politique réelle de votre organisation avant le déploiement en production."
+  },
+  "provision": {
+    "title": "Mise à Disposition",
+    "headers": {
+      "provision": "Prestation",
+      "price": "Prix"
+    },
+    "items": {
+      "one_hour": "1 heure",
+      "half_day": "Demi-journée (4 heures)",
+      "one_day": "1 jour (8 heures)",
+      "personalized": "Trajet personnalisé",
+      "price_request": "Prix sur demande"
+    },
+    "whatsapp_button": "Contactez-nous via WhatsApp"
+  },
+  "booking": {
+    "section_title": "Réservez votre moto",
+    "section_subtitle": "Rapide, facile et itinéraire en temps réel.",
+    "labels": {
+      "start": "Adresse de départ",
+      "end": "Destination",
+      "date": "Date",
+      "time": "Heure",
+      "moto_type": "Type de moto",
+      "any": "N'importe quel"
+    },
+    "placeholders": {
+      "start": "Entrez le lieu de prise en charge",
+      "end": "Entrez la destination"
+    },
+    "moto_types": [
+      "Standard",
+      "Premium",
+      "Cargo"
+    ],
+    "book_now": "Réserver maintenant",
+    "route_info": "{{distance}} • {{duration}}",
+    "validation": {
+      "address_required": "Veuillez sélectionner les deux adresses avant de réserver."
+    },
+    "map_loading": "Chargement de la carte…"
+  }
+}

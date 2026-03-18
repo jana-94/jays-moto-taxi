@@ -1,0 +1,239 @@
+
+.footer-outline {
+  background-color: #030405;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 15px 10px 10px 10px; /* top, right, bottom, left */
+}
+
+
+.logo-container{
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.header-logo {
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .header-logo:hover {
+    transform: translateY(-5px);
+  }
+
+  .social{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .social-icon{
+    height: 15px;
+    width: 15px;
+  }
+
+  .social-icon-outer{
+    background-color: #030405;
+    border-radius: 100px;
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+  }
+  .social-icon-outer:hover{
+    background-color: #ffffff33;
+  }
+  .address-section{
+    margin-top: 50px;
+    display: flex;
+    width: 40%;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .address-content {
+    color: #FFFFFF99;
+    font-size: .8rem;
+    font-family: var(--font-montserrat);
+  }
+
+  .address{
+    color: #FFFFFF;
+    align-items: center;
+    display: flex;
+  }
+
+  .address:hover {
+    cursor: pointer;
+    color: #22C58B;
+  }
+  .footer-bottom{
+    display: flex;
+    padding-top: 20px;
+    width: 90%;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .divider{
+    height: 0.2px;
+    width: 100%;
+    background-color: #ffffff33;
+    border: 100px;
+  }
+
+  @keyframes driveAcross {
+    0% {
+      transform: translateX(0);      /* Start at left (0px) */
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+      transform: translateX(85vw);  /* Move to right edge */
+    }
+    100% {
+      transform: translateX(85vw);
+      opacity: 0;
+    }
+  }
+  
+  
+  .car-animation {
+    animation: driveAcross 6s linear infinite;
+    animation-play-state: running;
+    position: relative;
+    display: inline-block;
+    max-width: 600px;
+  }
+
+  .car-animation:hover {
+    animation-play-state: paused;
+    cursor: pointer;
+  }
+
+  @media (max-width: 768px) {
+    .car-animation {
+      max-width: 600px;
+      height: 60px;
+    }
+    .car-animation {
+      max-width: 150px;
+    }
+    .footer-bottom{
+      justify-content: space-around;
+    }
+    .header-logo{
+      height: 40px;
+    }
+    .footer-outline{
+      padding: 30px 0px 30px;
+    }
+    .address-content {
+      font-size: 0.6rem;
+    }
+    @keyframes driveAcross {
+      0% {
+        transform: translateX(0);      /* Start at left (0px) */
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+        transform: translateX(80vw);  /* Move to right edge */
+      }
+      100% {
+        transform: translateX(80vw);
+        opacity: 0;
+      }
+    }
+  }
+  
+  @media (max-width: 730px) {
+    .hide-bottom-txt{
+      display: none;
+    }
+
+  }
+
+  @media (max-width: 425px) {
+    .header-logo{
+      height: 40px;
+    }
+    .address-content{
+      font-size: .5rem;
+    }
+    .car-animation {
+      max-width: 400px;
+      height: 50px;
+    }
+    @keyframes driveAcross {
+      0% {
+        transform: translateX(0);      /* Start at left (0px) */
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+        transform: translateX(60vw);  /* Move to right edge */
+      }
+      100% {
+        transform: translateX(60vw);
+        opacity: 0;
+      }
+    }
+  }
+
+  @media (max-width: 320px) {
+    .car-animation {
+      max-width: 400px;
+      height: 40px;
+    }
+    @keyframes driveAcross {
+      0% {
+        transform: translateX(0);      /* Start at left (0px) */
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+        transform: translateX(60vw);  /* Move to right edge */
+      }
+      100% {
+        transform: translateX(60vw);
+        opacity: 0;
+      }
+    }
+  }
+ @media (max-width: 450px) {
+.footer-outline {
+  background-color: #030405;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 10px 0px 0px 0px; /* top, right, bottom, left */
+}
+  .footer-bottom{
+    display: flex;
+    padding-top: 10px;
+    width: 100%;
+    
+  
+  }
+
+ }

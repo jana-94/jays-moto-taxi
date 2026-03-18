@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light Mode Variables */
+    --bg: #ffffff;
+    --text: #0f172a;
+
+    /* Ink colors for Light Mode (Dark Text) */
+    --ink: #0f172a;
+    --ink-light: #1f2937;
+    --ink-softer: #4b5563;
+
+    /* Component specifics */
+    --card-bg: #f8fafc;
+    --card-border: #e2e8f0;
+
+    /* Base UI colors */
+    --base-light: #f1f5f9;
+    --base-border: #e2e8f0;
+  }
+
+  .dark {
+    /* Dark Mode Variables */
+    --bg: #0b0f1a;
+    --text: #e5e7eb;
+
+    /* Ink colors for Dark Mode (Text-friendly shades) */
+    --ink: #e5e7eb;
+    /* Main text in dark mode */
+    --ink-light: #f3f4f6;
+    /* Lighter text */
+    --ink-softer: #9ca3af;
+    /* Gray 400 - readable for subtitles */
+
+    --card-bg: #161d2e;
+    --card-border: #1e293b;
+
+    --base-light: #1e293b;
+    --base-border: #334155;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-base text-base transition-colors duration-300;
+}
+
+.container {
+  @apply mx-auto max-w-7xl px-4 md:px-6;
+}
+
+.section {
+  @apply py-20 md:py-28;
+}
+
+.btn {
+  @apply inline-flex items-center rounded-full px-6 py-3 font-medium transition;
+}
+
+.btn-primary {
+  @apply bg-brand text-black hover:bg-brand-light;
+}
+
+.btn-outline {
+  @apply border border-brand text-brand hover:bg-brand hover:text-black;
+}
+
+.heading-hero {
+  @apply text-3xl sm:text-4xl md:text-6xl font-bold leading-tight;
+}
+
+.heading-section {
+  @apply text-3xl md:text-4xl font-semibold;
+}
+
+.subheading {
+  @apply text-ink-softer text-lg md:text-xl;
+}
+
+/* Ensure anchors account for sticky header */
+[id] {
+  scroll-margin-top: 90px;
+}
