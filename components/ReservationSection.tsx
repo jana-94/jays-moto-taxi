@@ -47,7 +47,9 @@ export default function ReservationSection() {
   const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || '';
 
   // Google Maps load state
-  const [isMapLoaded, setIsMapLoaded] = useState(false);
+  const [isMapLoaded, setIsMapLoaded] = useState(
+  () => typeof window !== 'undefined' && typeof window.google !== 'undefined'
+);
 
   // Step 1 — Fare Estimator state
   const [originLatLng, setOriginLatLng] = useState<google.maps.LatLngLiteral | null>(null);
@@ -155,10 +157,11 @@ export default function ReservationSection() {
 
   return (
     <section id="reservation" className="section bg-base py-0">
-      <Script
-        src={`https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`}
-        onLoad={() => setIsMapLoaded(true)}
-      />
+     <Script
+  src={`https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`}
+  strategy="afterInteractive"
+  onLoad={() => setIsMapLoaded(true)}
+/>
 
       <div className="container max-w-6xl mx-auto shadow-2xl rounded-2xl overflow-hidden my-6 md:my-12 bg-card border border-card">
         <div className="flex flex-col lg:flex-row min-h-[600px]">
@@ -368,11 +371,11 @@ export default function ReservationSection() {
                             >
                               <p className="text-xs text-ink-softer uppercase tracking-wide mb-1">{t('reservation.estimated_fare')}</p>
                               <p className="text-3xl font-black text-brand">€{estimatedFare}</p>
-                              <p className="text-xs text-ink-softer mt-1">
+                              {/* <p className="text-xs text-ink-softer mt-1">
                                 Base €25 + {parseKm(routeInfo?.distance || '0 km').toFixed(1)} km × €2
                                 {luggage > 0 ? t('reservation.fare_luggage') : ''}
                                 {tripType === 'round-trip' ? t('reservation.fare_round_trip') : ''}
-                              </p>
+                              </p> */}
                             </motion.div>
                           )}
                         </AnimatePresence>

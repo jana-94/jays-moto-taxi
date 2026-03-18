@@ -31,8 +31,9 @@ export default function LocationInput({
         if (!inputRef.current || !window.google) return;
 
         autoCompleteRef.current = new window.google.maps.places.Autocomplete(inputRef.current, {
-            types: ['address'],
-            componentRestrictions: { country: 'fr' } // Restricting to France as per requirements (Paris & IDF)
+            types: ['establishment', 'geocode'],
+            componentRestrictions: { country: 'fr' },
+            fields: ['formatted_address', 'geometry', 'name', 'place_id'], // Restricting to France as per requirements (Paris & IDF)
         });
 
         if (!autoCompleteRef.current) return;
