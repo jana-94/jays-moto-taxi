@@ -21,17 +21,18 @@ const translations: Record<Locale, Translations> = {
 };
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>('en');
+  const [locale, setLocaleState] = useState<Locale>('fr');
   const [isLoaded, setIsLoaded] = useState(false);
 
-  useEffect(() => {
-    // Load from localStorage on mount
-    const savedLocale = localStorage.getItem('app_locale') as Locale;
-    if (savedLocale && (savedLocale === 'en' || savedLocale === 'fr')) {
-      setLocaleState(savedLocale);
-    }
-    setIsLoaded(true);
-  }, []);
+useEffect(() => {
+  const savedLocale = localStorage.getItem('app_locale') as Locale;
+  if (savedLocale && (savedLocale === 'en' || savedLocale === 'fr')) {
+    setLocaleState(savedLocale);
+  } else {
+    setLocaleState('fr'); // default to French
+  }
+  setIsLoaded(true);
+}, []);
 
   const setLocale = (newLocale: Locale) => {
     setLocaleState(newLocale);
