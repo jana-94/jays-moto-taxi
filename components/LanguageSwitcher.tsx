@@ -51,21 +51,6 @@ export default function LanguageSwitcher() {
       {isOpen && (
         <div className="absolute left-0 md:left-auto md:right-0 mt-2 w-32 bg-card rounded-md shadow-lg py-1 z-50 overflow-hidden text-ink border border-card">
           <button
-            onClick={() => handleSelect('en')}
-            className={`flex items-center gap-3 w-full px-4 py-2 text-sm hover:bg-base-light transition-colors ${locale === 'en' ? 'bg-base-light font-semibold text-brand' : ''
-              }`}
-          >
-            <span className="relative w-6 h-4 overflow-hidden rounded-sm shadow-sm flex-shrink-0">
-              <Image
-                src="/images/flags/gb.svg"
-                alt="English"
-                fill
-                className="object-cover"
-              />
-            </span>
-            <span>English</span>
-          </button>
-          <button
             onClick={() => handleSelect('fr')}
             className={`flex items-center gap-3 w-full px-4 py-2 text-sm hover:bg-base-light transition-colors ${locale === 'fr' ? 'bg-base-light font-semibold text-brand' : ''
               }`}
@@ -80,6 +65,22 @@ export default function LanguageSwitcher() {
             </span>
             <span>Français</span>
           </button>
+          <button
+            onClick={() => handleSelect('en')}
+            className={`flex items-center gap-3 w-full px-4 py-2 text-sm hover:bg-base-light transition-colors ${locale === 'en' ? 'bg-base-light font-semibold text-brand' : ''
+              }`}
+          >
+            <span className="relative w-6 h-4 overflow-hidden rounded-sm shadow-sm flex-shrink-0">
+              <Image
+                src="/images/flags/gb.svg"
+                alt="English"
+                fill
+                className="object-cover"
+              />
+            </span>
+            <span>English</span>
+          </button>
+          
         </div>
       )}
     </div>
