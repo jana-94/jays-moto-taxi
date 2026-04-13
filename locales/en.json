@@ -6,13 +6,19 @@
     "reservation": "Reservation",
     "contact": "Contact",
     "select_language": "Select Language",
-    "slogan": "Time is precious, just like you"
+    "slogan": "Time is precious, just like you",
+    "airports": "Airports",
+    "stations": "Stations",
+    "gare_du_nord": "Gare du Nord",
+    "gare_de_lyon": "Gare de Lyon",
+    "gare_de_l_est": "Gare de l'Est",
+    "montparnasse": "Gare Montparnasse"
   },
   "hero": {
     "slides": [
       {
-        "title": "Fast & Safe City Mototaxi Services",
-        "subtitle": "Navigate the city with ease. Available 24/7 for your daily commute and urgent travels."
+        "title": "Need a motorcycle taxi in Paris? Available in less than 10 minutes.",
+        "subtitle": "A premium service available 24/7, with guaranteed fixed fares, VMDTR-certified drivers, and instant booking."
       },
       {
         "title": "Speed • Punctuality • Peace of Mind",
@@ -24,25 +30,46 @@
       }
     ],
     "book_ride": "Book a Ride",
-    "our_services": "Our Services"
+    "our_services": "Our Services",
+    "whatsapp": "WhatsApp",
+    "call": "Call Us",
+    "top_badge": "Taxi Moto Premium · Paris & Île-de-France",
+    "badges": {
+      "airports": "✈️ Airports: CDG · Orly · Bourget",
+      "stations": "🚊 All Paris train stations",
+      "paris_idf": "🏙️ Paris & Île-de-France"
+    }
   },
   "pricing": {
-    "title": "Our Pricing",
-    "subtitle": "Transparent rates for your journeys.",
-    "table_headers": {
-      "route": "Route",
-      "price": "Price (€)"
-    },
-    "routes": {
-      "paris_paris": "Paris - Paris",
-      "paris_orly": "Paris - Orly",
-      "paris_cdg": "Paris - CDG",
-      "orly_cdg": "Orly - CDG",
-      "paris_bourget": "Paris - Bourget",
-      "paris_inner_suburbs": "Paris - Inner Suburbs",
-      "la_defense_cdg": "La Défense - CDG",
-      "la_defense_orly": "La Défense - Orly"
-    }
+    "title": "Fixed & Transparent Rates",
+    "subtitle": "Zero surprises on the price",
+    "description": "No extra charge at night, on weekends, on public holidays or in case of traffic. Price fixed upon booking.",
+    "cards": [
+      {
+        "title": "CDG Roissy",
+        "subtitle": "Terminals 1, 2, 3",
+        "price": "€100",
+        "footer": "Fixed price · Free waiting time"
+      },
+      {
+        "title": "Orly",
+        "subtitle": "All wings",
+        "price": "80€",
+        "footer": "Fixed price · Flight tracking"
+      },
+      {
+        "title": "Le Bourget",
+        "subtitle": "Business airport",
+        "price": "€100",
+        "footer": "Guaranteed fixed price"
+      },
+      {
+        "title": "Stations & Paris",
+        "subtitle": "Paris (within the city limits)",
+        "price": "€60",
+        "footer": "Fixed price"
+      }
+    ]
   },
   "reservation": {
     "brand_title": "Jay's Taxi Moto",
@@ -93,7 +120,8 @@
     "booking_sent": "Booking Sent ✓",
     "success_msg": "Booking request sent! We'll contact you shortly.",
     "error_msg": "Something went wrong. Please try again or call us directly.",
-    "fare_summary_label": "Estimated Fare"
+    "fare_summary_label": "Estimated Fare",
+    "fare_disclaimer": "*Estimated fare – final price confirmed by SMS after reservation."
   },
   "footer": {
     "description": "Strategy, design, and technology to accelerate business growth.",
@@ -153,6 +181,12 @@
     "parcel_title": "Parcel Delivery",
     "parcel_text_1": "We also provide parcel and document delivery services, available upon quotation.",
     "parcel_text_2": "Our delivery service guarantees fast, secure handling, tailored to your needs, for both individuals and professionals.",
+    "divers_title": "MISCELLANEOUS",
+    "passport_title": "1. Forgot your passport and already arrived at the airport? A quick and reliable solution",
+    "passport_text": "In the event of a forgotten passport or important document, our driver can intervene quickly to retrieve it from your home, hotel, or any other location, and deliver it to you as soon as possible. This service allows you to avoid any last-minute stress and travel with peace of mind, even in the event of unforeseen circumstances.",
+    "visit_paris_title": "2. Visit Paris by motorcycle",
+    "visit_paris_subtitle": "Visit Paris by motorcycle with a driver – freedom and time saving",
+    "visit_paris_text": "Enjoy a unique experience to discover Paris with our chauffeured motorcycle service. Ideal for avoiding traffic jams and optimizing your travel, this service allows you to move easily between the different iconic sites of the capital. Flexible and personalized, it adapts to your schedule for a smooth, comfortable, and original visit.",
     "cta_title": "Ready to Book Your Ride?",
     "cta_subtitle": "Experience the fastest and most comfortable way to travel in Paris.",
     "cta_button": "Contact Now",
@@ -160,7 +194,9 @@
       "taxi_service": "Taxi Service",
       "vehicle_maintenance": "Vehicle Maintenance",
       "luggage_option": "Luggage Option",
-      "parcel_delivery": "Parcel Delivery"
+      "parcel_delivery": "Parcel Delivery",
+      "passport_recovery": "Passport recovery",
+      "paris_visit": "Paris motorcycle tour"
     }
   },
   "contact_page": {
@@ -211,31 +247,22 @@
   "home_page": {
     "services": {
       "title": "Our Services",
-      "subtitle": "We guarantee a fast, reliable, and secure service, offering real time savings, flawless punctuality, optimal comfort, and strictly respected hygiene standards.",
+      "subtitle": "Airport Transfers: CDG Roissy, Orly and Le Bourget. Free waiting time and real-time flight tracking. Service available 24/7.\n\nParisian train stations: Gare du Nord, Gare de Lyon, Montparnasse, Gare de l'Est, Saint-Lazare. Free waiting time if delayed.\n\nParis Transfer: Home, office, hotel or business meeting. Paris and inner suburbs, with fixed price.",
       "items": {
-        "punctuality": {
-          "title": "Punctuality",
-          "desc": "We value your time. Our drivers are always on schedule to ensure you reach your destination without delay."
+        "airports": {
+          "title": "Airport Transfers",
+          "desc": "CDG Roissy, Orly, Le Bourget. Free waiting time, real-time flight tracking. Available 24/7.",
+          "price": "Starting from €80"
         },
-        "flexibility": {
-          "title": "Flexibility",
-          "desc": "Adaptable to your needs. Whether it's a last-minute change or a specific route, we accommodate your requests."
+        "stations": {
+          "title": "Parisian train stations",
+          "desc": "Gare du Nord, Gare de Lyon, Montparnasse, Gare de l'Est, Saint-Lazare. Free waiting time if delayed.",
+          "price": "Starting from €60"
         },
-        "hygiene": {
-          "title": "Hygiene",
-          "desc": "Immaculate cleanliness. Our vehicles are regularly sanitized and maintained to the highest standards of hygiene."
-        },
-        "security": {
-          "title": "Security",
-          "desc": "Your safety is our priority. Verified drivers and tracked rides ensure a secure journey every time."
-        },
-        "comfort": {
-          "title": "Comfort",
-          "desc": "Ride in style and relaxation. Our premium fleet offers maximum comfort for a pleasant travel experience."
-        },
-        "professionalism": {
-          "title": "Professionalism",
-          "desc": "Expert service you can trust. Our courteous and experienced chauffeurs provide top-tier service."
+        "paris": {
+          "title": "Transfer Paris to Paris",
+          "desc": "Home, office, hotel, business meeting. Paris (within the city limits) and inner suburbs. Fixed price.",
+          "price": "Starting from €60"
         }
       }
     },
@@ -323,5 +350,294 @@
       "address_required": "Please select both addresses before booking."
     },
     "map_loading": "Loading map…"
+  },
+  "airports_page": {
+    "cdg": {
+      "hero_title": "CDG Roissy Airport Transfer",
+      "hero_subtitle": "Terminal 1, 2 & 3 — Fixed rate, real-time flight tracking, free waiting.",
+      "price_badge": "100€ Fixed Rate",
+      "price_label": "Paris → CDG (All Terminals)",
+      "details_title": "Journey Details",
+      "details": [
+        { "label": "PRICE", "value": "€100", "subtext": "Fixed price · No extra charges" },
+        { "label": "DISTANCE", "value": "~30 km", "subtext": "From within Paris city limits" },
+        { "label": "TRAVEL TIME", "value": "35–45 min", "subtext": "Even during peak hours" },
+        { "label": "AVAILABILITY", "value": "24/7", "subtext": "7 days a week, 365 days a year" },
+        { "label": "WAITING FOR DELAYED FLIGHT", "value": "Free", "subtext": "Real-time tracking" }
+      ],
+      "why_title": "Why book our CDG motorcycle taxi?",
+      "why_points": [
+        "Avoid traffic on the A1/A3",
+        "€100 — Fixed and guaranteed price",
+        "Maximum time savings from CDG Airport",
+        "Fast and punctual pickup",
+        "Certified and experienced drivers",
+        "Real-time flight tracking",
+        "Guaranteed fixed fare, no surprises",
+        "Service available 24/7",
+        "Premium comfort and safety"
+      ],
+      "pickup_title": "Meeting Point at CDG",
+      "pickup_text": "Your driver will be waiting for you at Terminal 1 — Gate 4, arrivals hall, holding a sign with your name.",
+      "booking_title": "How to Book — 4 Easy Steps",
+      "booking_steps": [
+        { "step": "1", "title": "Enter Your Journey", "desc": "Provide your date, time, flight number, and address." },
+        { "step": "2", "title": "Secure Online Payment", "desc": "Pay safely by card, Apple Pay, or PayPal. No hidden charges." },
+        { "step": "3", "title": "Booking Confirmation", "desc": "Receive your driver's name, number, and pickup instructions by SMS." },
+        { "step": "4", "title": "Your Driver Arrives", "desc": "Your punctual driver will meet you at the agreed pickup point with a nameplate." }
+      ],
+      "cta_button": "Book My CDG Transfer",
+      "terminals_title": "All served CDG terminals",
+      "terminals_subtitle": "Same fixed price for all terminals — Choose yours",
+      "terminals": [
+        { "name": "Terminal 1", "desc": "International airlines - Star Alliance - Emirates - Qatar...", "price": "100€" },
+        { "name": "Terminal 2A", "desc": "Air France Europe - Short and medium-haul flights", "price": "100€" },
+        { "name": "Terminal 2B", "desc": "Schengen area - European airlines", "price": "100€" },
+        { "name": "Terminal 2C", "desc": "Air France - Domestic & Europe flights", "price": "100€" },
+        { "name": "Terminal 2D", "desc": "European airlines - EasyJet - Austrian Airlines", "price": "100€" },
+        { "name": "Terminal 2E", "desc": "Air France main hub - Long-haul & intercontinental", "price": "100€" },
+        { "name": "Terminal 2F", "desc": "Air France partners - HOP! - Vueling - Hop Air", "price": "100€" },
+        { "name": "Terminal 3", "desc": "Charters & low-cost - Ryanair - EasyJet (CDG)", "price": "100€" }
+      ]
+    },
+    "orly": {
+      "hero_title": "Orly Airport Transfer",
+      "hero_subtitle": "All Terminals (1, 2, 3 & 4) — Fixed rate, free waiting, flight tracking included.",
+      "price_badge": "80€ Fixed Rate",
+      "price_label": "Paris → Orly (All Terminals)",
+      "details_title": "Journey Details",
+      "details": [
+        { "label": "PRICE", "value": "€80", "subtext": "Fixed price · No extra charges" },
+        { "label": "DISTANCE", "value": "14–20 km", "subtext": "From within Paris city limits" },
+        { "label": "TRAVEL TIME", "value": "~20 min", "subtext": "Even during peak hours" },
+        { "label": "AVAILABILITY", "value": "24/7", "subtext": "7 days a week, 365 days a year" },
+        { "label": "WAITING FOR DELAYED FLIGHT", "value": "Free", "subtext": "Real-time tracking" }
+      ],
+      "why_title": "Why book our motorcycle taxi to Orly?",
+      "why_points": [
+        "Avoid traffic on the A6",
+        "Only 20 minutes from southern Paris",
+        "Fixed fare of €80 — no surprises",
+        "Real-time flight tracking at Orly",
+        "No extra charges in case of flight delays"
+      ],
+      "pickup_title": "Meeting Point at Orly",
+      "pickup_text": "Your driver will be waiting at the arrivals hall of your terminal, holding a sign with your name.",
+      "booking_title": "How to Book — 4 Easy Steps",
+      "booking_steps": [
+        { "step": "1", "title": "Enter Your Journey", "desc": "Provide your date, time, flight number, and address." },
+        { "step": "2", "title": "Secure Online Payment", "desc": "Pay safely by card, Apple Pay, or PayPal. No hidden charges." },
+        { "step": "3", "title": "Booking Confirmation", "desc": "Receive your driver's name, number, and pickup instructions by SMS." },
+        { "step": "4", "title": "Your Driver Arrives", "desc": "Your punctual driver will meet you at the agreed pickup point with a nameplate." }
+      ],
+      "cta_button": "Book My Orly Transfer",
+      "terminals_title": "All served Orly terminals",
+      "terminals_subtitle": "Same fixed price for all terminals — Choose yours",
+      "terminals": [
+        { "name": "Orly 1", "desc": "Air France - Air Corsica - TAP Air Portugal", "price": "80€" },
+        { "name": "Orly 2", "desc": "Air France - European airlines", "price": "80€" },
+        { "name": "Orly 3", "desc": "Transavia - Air France (Long-haul)", "price": "80€" },
+        { "name": "Orly 4", "desc": "French Bee - Corsair - Royal Air Maroc", "price": "80€" }
+      ]
+    }
+  },
+  "stations_page": {
+    "gare_du_nord": {
+      "hero_title": "Taxi Moto Gare Du Nord",
+      "hero_subtitle": "1st station in Europe — Pickup Rue de Dunkerque, guaranteed fixed price, free waiting for delayed trains, available 24/7",
+      "price_badge": "60€ Fixed Rate",
+      "price_label": "Paris ↔ Gare du Nord",
+      "details": [
+        { "label": "PRICE", "value": "60€", "subtext": "Fixed price · No extra charges" },
+        { "label": "TRAVEL TIME", "value": "20–30 min", "subtext": "From anywhere in Paris" },
+        { "label": "AVAILABILITY", "value": "24/7", "subtext": "7j/7 - No night surcharge" },
+        { "label": "TRAIN DELAY", "value": "Free", "subtext": "Real-time SNCF tracking" }
+      ],
+      "why_title": "Why book our Gare du Nord motorcycle taxi?",
+      "why_points": [
+        "Avoid traffic around Gare du Nord",
+        "Punctual pickup on Rue de Dunkerque",
+        "Fixed fare of 60€ — no surprises",
+        "Real-time train tracking",
+        "Service available 24/7"
+      ],
+      "meeting_title": "Meeting Point at Gare du Nord",
+      "meeting_desc": "Main exit — Rue de Dunkerque. Your driver will be waiting with a sign with your name.",
+      "booking_title": "Book in a few clicks",
+      "booking_steps": [
+        { "step": "1", "title": "Choose your journey", "desc": "Indicate your pickup point, destination and schedule." },
+        { "step": "2", "title": "Book online or via WhatsApp", "desc": "Simple form or direct contact in seconds." },
+        { "step": "3", "title": "Immediate confirmation", "desc": "Driver details sent instantly." },
+        { "step": "4", "title": "Your driver arrives", "desc": "Punctual pickup with premium service." }
+      ],
+      "cta_button": "Book My Transfer"
+    },
+    "gare_de_lyon": {
+      "hero_title": "Taxi Moto Gare De Lyon",
+      "hero_subtitle": "Gateway to the South — Marseille, Nice, Lyon, Geneva, Turin — Pickup Boulevard Diderot, guaranteed fixed price, free waiting for delayed trains, available 24/7",
+      "price_badge": "60€ Fixed Rate",
+      "price_label": "Paris ↔ Gare de Lyon",
+      "details": [
+        { "label": "PRICE", "value": "60€", "subtext": "Fixed price · No extra charges" },
+        { "label": "TRAVEL TIME", "value": "15–25 min", "subtext": "From anywhere in Paris" },
+        { "label": "AVAILABILITY", "value": "24/7", "subtext": "7j/7 - No night surcharge" },
+        { "label": "TRAIN DELAY", "value": "Free", "subtext": "Real-time SNCF tracking" }
+      ],
+      "why_title": "Why book our Gare de Lyon motorcycle taxi?",
+      "why_points": [
+        "Avoid traffic around Gare de Lyon",
+        "Easy pickup on Boulevard Diderot",
+        "Fixed fare of 60€ — no surprises",
+        "Real-time train tracking",
+        "Direct connection to high-speed trains"
+      ],
+      "meeting_title": "Meeting Point at Gare de Lyon",
+      "meeting_desc": "Porte du Sud — Boulevard Diderot. Your driver will be waiting with a sign with your name.",
+      "booking_title": "Book in a few clicks",
+      "booking_steps": [
+        { "step": "1", "title": "Choose your journey", "desc": "Indicate your pickup point, destination and schedule." },
+        { "step": "2", "title": "Book online or via WhatsApp", "desc": "Simple form or direct contact in seconds." },
+        { "step": "3", "title": "Immediate confirmation", "desc": "Driver details sent instantly." },
+        { "step": "4", "title": "Your driver arrives", "desc": "Punctual pickup with premium service." }
+      ],
+      "cta_button": "Book My Transfer"
+    },
+    "gare_de_l_est": {
+      "hero_title": "Taxi Moto Gare De L'Est",
+      "hero_subtitle": "Gateway to the East — Strasbourg, Nancy, Reims — Pickup Boulevard de Strasbourg, guaranteed fixed price, free waiting for delayed trains, available 24/7",
+      "price_badge": "60€ Fixed Rate",
+      "price_label": "Paris ↔ Gare de l'Est",
+      "details": [
+        { "label": "PRICE", "value": "60€", "subtext": "Fixed price · No extra charges" },
+        { "label": "TRAVEL TIME", "value": "15–25 min", "subtext": "From anywhere in Paris" },
+        { "label": "AVAILABILITY", "value": "24/7", "subtext": "7j/7 - No night surcharge" },
+        { "label": "TRAIN DELAY", "value": "Free", "subtext": "Real-time SNCF tracking" }
+      ],
+      "why_title": "Why book our Gare de l'Est motorcycle taxi?",
+      "why_points": [
+        "Avoid traffic around Gare de l'Est",
+        "Convenient pickup on Boulevard de Strasbourg",
+        "Fixed fare of 60€ — no surprises",
+        "Real-time train tracking",
+        "Professional service for travelers"
+      ],
+      "meeting_title": "Meeting Point at Gare de l'Est",
+      "meeting_desc": "Main exit — Boulevard de Strasbourg. Your driver will be waiting with a sign with your name.",
+      "booking_title": "Book in a few clicks",
+      "booking_steps": [
+        { "step": "1", "title": "Choose your journey", "desc": "Indicate your pickup point, destination and schedule." },
+        { "step": "2", "title": "Book online or via WhatsApp", "desc": "Simple form or direct contact in seconds." },
+        { "step": "3", "title": "Immediate confirmation", "desc": "Driver details sent instantly." },
+        { "step": "4", "title": "Your driver arrives", "desc": "Punctual pickup with premium service." }
+      ],
+      "cta_button": "Book My Transfer"
+    },
+    "gare_montparnasse": {
+      "hero_title": "Taxi Moto Gare Montparnasse",
+      "hero_subtitle": "Gateway to the West — Bordeaux, Nantes, Rennes, Brest — Pickup Boulevard de Vaugirard, guaranteed fixed price, free waiting for delayed trains, available 24/7",
+      "price_badge": "60€ Fixed Rate",
+      "price_label": "Paris ↔ Gare Montparnasse",
+      "details": [
+        { "label": "PRICE", "value": "60€", "subtext": "Fixed price · No extra charges" },
+        { "label": "TRAVEL TIME", "value": "15–25 min", "subtext": "From anywhere in Paris" },
+        { "label": "AVAILABILITY", "value": "24/7", "subtext": "7j/7 - No night surcharge" },
+        { "label": "TRAIN DELAY", "value": "Free", "subtext": "Real-time SNCF tracking" }
+      ],
+      "why_title": "Why book our Gare Montparnasse motorcycle taxi?",
+      "why_points": [
+        "Avoid traffic around Montparnasse",
+        "Fast pickup on Boulevard de Vaugirard",
+        "Fixed fare of 60€ — no surprises",
+        "Real-time train tracking",
+        "Ideal for business trips to the West"
+      ],
+      "meeting_title": "Meeting Point at Gare Montparnasse",
+      "meeting_desc": "Main exit — Boulevard de Vaugirard. Your driver will be waiting with a sign with your name.",
+      "booking_title": "Book in a few clicks",
+      "booking_steps": [
+        { "step": "1", "title": "Choose your journey", "desc": "Indicate your pickup point, destination and schedule." },
+        { "step": "2", "title": "Book online or via WhatsApp", "desc": "Simple form or direct contact in seconds." },
+        { "step": "3", "title": "Immediate confirmation", "desc": "Driver details sent instantly." },
+        { "step": "4", "title": "Your driver arrives", "desc": "Punctual pickup with premium service." }
+      ],
+      "cta_button": "Book My Transfer"
+    }
+  },
+  "various_page": {
+    "passport": {
+      "hero_title": "Forgotten Passport? We've Got You Covered.",
+      "hero_subtitle": "Fast and reliable document retrieval service — so you never miss your flight.",
+      "content_title": "A Rapid, Reliable Solution",
+      "content_text": "Left your passport at home before an important flight? Our driver can intervene quickly to collect your passport or any essential document from your home, hotel, or any location in Paris and Île-de-France, and deliver it to you promptly so you can travel with complete peace of mind.",
+      "features": [
+        "Rapid dispatch — driver on the way in minutes",
+        "Collection from any address in Paris & Île-de-France",
+        "Available 24/7, every day of the year",
+        "Real-time tracking and direct driver contact",
+        "Discreet, professional, and fully insured service"
+      ],
+      "cta_button": "Request Urgent Retrieval",
+      "cta_subtitle": "Don't panic — call or WhatsApp us right now and we'll sort it out."
+    },
+    "visit_paris": {
+      "hero_title": "Discover Paris by Moto",
+      "hero_subtitle": "A unique, flexible way to explore the French capital with a professional guide-driver.",
+      "content_title": "Freedom, Speed & Style",
+      "content_text": "Experience Paris like never before — weaving through iconic boulevards, discovering hidden gems, and reaching every landmark without the hassle of traffic or parking. Our flexible moto-taxi tour service puts you in control, with personalised routes tailored to your interests.",
+      "features": [
+        "Flexible, personalised sightseeing routes",
+        "Iconic landmarks: Eiffel Tower, Notre-Dame, Montmartre & more",
+        "No traffic jams — explore at your own pace",
+        "Half-day and full-day options available",
+        "Available for individuals, couples, and small groups"
+      ],
+      "provision_title": "Flexible Booking Options",
+      "provisions": [
+        { "label": "1 Hour Ride", "price": "From €60" },
+        { "label": "Half Day (4 Hours)", "price": "From €200" },
+        { "label": "Full Day (8 Hours)", "price": "From €350" },
+        { "label": "Custom Route", "price": "On request" }
+      ],
+      "cta_button": "Plan My Paris Tour",
+      "cta_subtitle": "Contact us via WhatsApp or phone and we'll build your perfect Paris itinerary."
+    }
+  },
+  "process": {
+    "urgency": "Departure in less than 1 hour? Contact us directly",
+    "steps": [
+      {
+        "title": "Book in 2 minutes",
+        "desc": "Online, via WhatsApp, or by phone, with instant confirmation."
+      },
+      {
+        "title": "Plan your trip",
+        "desc": "Select your pickup location, destination, and time on our online platform, or contact us directly."
+      },
+      {
+        "title": "Confirmation by SMS",
+        "desc": "Immediate confirmation via WhatsApp with driver details."
+      },
+      {
+        "title": "Your driver will arrive in 10 minutes",
+        "desc": "A punctual and fully equipped driver arrives to pick you up."
+      }
+    ]
+  },
+  "zones": {
+    "title": "Served Zones",
+    "cards": [
+      {
+        "title": "Airports",
+        "tags": ["CDG T1", "CDG T2", "CDG T3", "Orly South", "Orly West", "Le Bourget"]
+      },
+      {
+        "title": "Train Stations",
+        "tags": ["Gare du Nord", "Gare de Lyon", "Montparnasse", "Gare de l'Est", "Saint-Lazare", "Bercy"]
+      },
+      {
+        "title": "Paris & IDF",
+        "tags": ["Paris 1st–20th", "Hauts-de-Seine", "Seine-Saint-Denis", "Val-de-Marne", "Essonne", "Yvelines"]
+      }
+    ]
   }
 }

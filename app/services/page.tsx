@@ -4,7 +4,7 @@ import Footer from '@/components/Footer';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
-import { FiPackage, FiShoppingBag } from 'react-icons/fi';
+import { FiPackage, FiShoppingBag, FiFileText, FiCompass } from 'react-icons/fi';
 import { useLanguage } from '@/app/context/LanguageContext';
 
 export default function ServicesPage() {
@@ -60,7 +60,7 @@ export default function ServicesPage() {
       <Navbar />
       <main>
         {/* Service Hero */}
-        <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
+        <section className="relative min-h-[80vh] md:min-h-[100vh] flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0 -z-10">
             <Image
               src={heroImage}
@@ -149,7 +149,7 @@ export default function ServicesPage() {
         </section>
 
         {/* Vehicle Maintenance Section */}
-        <section className="section container">
+        <section className="section container ">
           <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <div className="relative h-[250px] md:h-[400px] rounded-2xl overflow-hidden shadow-soft border border-card md:order-last">
               <Image
@@ -167,9 +167,55 @@ export default function ServicesPage() {
             </div>
           </div>
         </section>
+  {/* Divers Section */}
+        <section className="section bg-base-light">
+          <div className="container max-w-5xl">
+            <h2 className="heading-section text-center mb-10 md:mb-12">{t('services_page.divers_title')}</h2>
+            <div className="flex flex-col md:flex-row gap-10 md:gap-8">
+              
+              {/* Left Column (Passport) */}
+              <div className="flex-1 flex flex-col gap-4 md:gap-6">
+                <h3 className="heading-section flex items-center gap-3 text-2xl">
+                  <FiFileText className="text-brand shrink-0" /> {t('services_page.passport_title')}
+                </h3>
+                <div className="flex-1 space-y-3 md:space-y-4 text-base md:text-lg text-ink-softer">
+                  <p>{t('services_page.passport_text')}</p>
+                </div>
+                <div className="relative h-[280px] md:h-[380px] w-full rounded-xl overflow-hidden shadow-sm border border-card">
+                  <Image
+                    src="/images/services/passport_service.png"
+                    alt={t('services_page.alts.passport_recovery')}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              </div>
+
+              {/* Right Column (Visit Paris) */}
+              <div className="flex-1 flex flex-col gap-4 md:gap-6">
+                <h3 className="heading-section flex items-center gap-3 text-2xl">
+                  <FiCompass className="text-brand shrink-0" /> {t('services_page.visit_paris_title')}
+                </h3>
+                <div className="flex-1 space-y-3 md:space-y-4 text-base md:text-lg text-ink-softer">
+                  <p className="font-medium text-ink">{t('services_page.visit_paris_subtitle')}</p>
+                  <p>{t('services_page.visit_paris_text')}</p>
+                </div>
+                <div className="relative h-[280px] md:h-[380px] w-full rounded-xl overflow-hidden shadow-sm border border-card">
+                  <Image
+                    src="/images/services/paris_moto_visit.png"
+                    alt={t('services_page.alts.paris_visit')}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>  
 
         {/* Luggage Option Section */}
-        <section className="section bg-base-light">
+        <section className="section ">
   <div className="container max-w-5xl">
     <div className="flex flex-col md:flex-row gap-10 md:gap-8">
       
@@ -216,7 +262,7 @@ export default function ServicesPage() {
 </section>
 
         {/* Contact CTA */}
-        <section className="section container text-center">
+        <section className="section container text-center ">
           <div className="bg-brand/10 rounded-2xl md:rounded-3xl p-8 md:p-12 max-w-4xl mx-auto">
             <h2 className="heading-section mb-4 md:mb-6">{t('services_page.cta_title')}</h2>
             <p className="text-lg md:text-xl text-ink-softer mb-6 md:mb-8">

@@ -6,13 +6,19 @@
     "reservation": "Réservation",
     "contact": "Contact",
     "select_language": "Choisir la langue",
-    "slogan": "Le temps est précieux, tout comme vous"
+    "slogan": "Le temps est précieux, tout comme vous",
+    "airports": "Aéroports",
+    "stations": "Gares",
+    "gare_du_nord": "Gare du Nord",
+    "gare_de_lyon": "Gare de Lyon",
+    "gare_de_l_est": "Gare de l'Est",
+    "montparnasse": "Gare Montparnasse"
   },
   "hero": {
     "slides": [
       {
-        "title": "Services de Mototaxi Rapides & Sûrs",
-        "subtitle": "Naviguez en ville avec facilité. Disponible 24/7 pour vos trajets quotidiens et urgents."
+        "title": "Besoin d’un Taxi Moto à Paris ? Disponible en moins de 10 minutes.",
+        "subtitle": "Un service premium disponible 24h/24 et 7j/7, avec tarifs fixes garantis, chauffeurs certifiés VMDTR et réservation instantanée."
       },
       {
         "title": "Vitesse • Ponctualité • Tranquillité d'esprit",
@@ -24,25 +30,46 @@
       }
     ],
     "book_ride": "Réserver une course",
-    "our_services": "Nos Services"
+    "our_services": "Nos Services",
+    "whatsapp": "WhatsApp",
+    "call": "Nous Appeler",
+    "top_badge": "Taxi Moto Premium · Paris & Île-de-France",
+    "badges": {
+      "airports": "✈️ Aéroports : CDG · Orly · Bourget",
+      "stations": "🚊 Toutes les gares parisiennes",
+      "paris_idf": "🏙️ Paris & Île-de-France"
+    }
   },
   "pricing": {
-    "title": "Nos Tarifs",
-    "subtitle": "Des tarifs transparents pour vos trajets.",
-    "table_headers": {
-      "route": "Trajet",
-      "price": "Prix (€)"
-    },
-    "routes": {
-      "paris_paris": "Paris - Paris",
-      "paris_orly": "Paris - Orly",
-      "paris_cdg": "Paris - CDG",
-      "orly_cdg": "Orly - CDG",
-      "paris_bourget": "Paris - Bourget",
-      "paris_inner_suburbs": "Paris - Petite Couronne",
-      "la_defense_cdg": "La Défense - CDG",
-      "la_defense_orly": "La Défense - Orly"
-    }
+    "title": "Tarifs Fixes & Transparents",
+    "subtitle": "Zéro surprise sur le prix",
+    "description": "Pas de supplément la nuit, le week-end, les jours fériés ou en cas de trafic. Tarif fixé dès la réservation.",
+    "cards": [
+      {
+        "title": "CDG Roissy",
+        "subtitle": "Terminaux 1, 2, 3",
+        "price": "100€",
+        "footer": "Prix fixe · Attente offerte"
+      },
+      {
+        "title": "Orly",
+        "subtitle": "Tous terminaux",
+        "price": "80€",
+        "footer": "Prix fixe · Suivi des vols"
+      },
+      {
+        "title": "Le Bourget",
+        "subtitle": "Aviation d'affaires",
+        "price": "100€",
+        "footer": "Prix fixe garanti"
+      },
+      {
+        "title": "Gares & Paris",
+        "subtitle": "Paris intra-muros",
+        "price": "60€",
+        "footer": "Prix fixe"
+      }
+    ]
   },
   "reservation": {
     "brand_title": "Jay’s Taxi Moto",
@@ -93,7 +120,8 @@
     "booking_sent": "Réservation envoyée ✓",
     "success_msg": "Demande de réservation envoyée ! Nous vous contacterons sous peu.",
     "error_msg": "Une erreur s'est produite. Veuillez réessayer ou nous appeler directement.",
-    "fare_summary_label": "Tarif estimé"
+    "fare_summary_label": "Tarif estimé",
+    "fare_disclaimer": "*Tarif estimatif – prix final confirmé par SMS après réservation."
   },
   "footer": {
     "description": "Stratégie, design et technologie pour accélérer la croissance des entreprises.",
@@ -153,6 +181,12 @@
     "parcel_title": "Livraison de Colis",
     "parcel_text_1": "Nous proposons également des services de livraison de colis et de documents, disponibles sur devis.",
     "parcel_text_2": "Notre service de livraison garantit une manipulation rapide et sécurisée, adaptée à vos besoins, tant pour les particuliers que pour les professionnels.",
+    "divers_title": "DIVERS",
+    "passport_title": "1. Passeport oublié et déjà arrivé à l’aéroport ? Une solution rapide et fiable",
+    "passport_text": "En cas d’oubli de passeport ou de document important, notre chauffeur peut intervenir rapidement pour le récupérer à votre domicile, hôtel ou tout autre lieu, et vous le remettre dans les meilleurs délais. Ce service vous permet d’éviter tout stress de dernière minute et de voyager en toute sérénité, même en cas d’imprévu.",
+    "visit_paris_title": "2. Visiter Paris en moto",
+    "visit_paris_subtitle": "Visitez Paris en moto avec chauffeur – liberté et gain de temps",
+    "visit_paris_text": "Profitez d’une expérience unique pour découvrir Paris grâce à notre service de mise à disposition en moto avec chauffeur. Idéal pour éviter les embouteillages et optimiser vos déplacements, ce service vous permet de circuler facilement entre les différents sites emblématiques de la capitale. Flexible et personnalisé, il s’adapte à votre programme pour une visite fluide, confortable et originale.",
     "cta_title": "Prêt à réserver votre trajet ?",
     "cta_subtitle": "Découvrez le moyen le plus rapide et le plus confortable de voyager à Paris.",
     "cta_button": "Contactez-nous maintenant",
@@ -160,7 +194,9 @@
       "taxi_service": "Service de Taxi",
       "vehicle_maintenance": "Entretien du Véhicule",
       "luggage_option": "Option Bagages",
-      "parcel_delivery": "Livraison de Colis"
+      "parcel_delivery": "Livraison de Colis",
+      "passport_recovery": "Récupération de passeport",
+      "paris_visit": "Visite de Paris en moto"
     }
   },
   "contact_page": {
@@ -210,32 +246,23 @@
   },
   "home_page": {
     "services": {
-      "title": "Nos Services",
-      "subtitle": "Nous garantissons un service rapide, fiable et sécurisé, offrant un gain de temps réel, une ponctualité sans faille, un confort optimal et des normes d'hygiène strictement respectées.",
+      "title": "Nos services :",
+      "subtitle": "Transfert aéroports : CDG Roissy, Orly et Le Bourget. Attente offerte et suivi des vols en temps réel. Service disponible 24h/24.\n\nTransfert gares parisiennes : Gare du Nord, Gare de Lyon, Montparnasse, Gare de l’Est, Saint-Lazare. Attente gratuite en cas de retard.\n\nTransfert Paris : Domicile, bureau, hôtel ou rendez-vous pro. Paris intra-muros et petite couronne, avec prix fixe.",
       "items": {
-        "punctuality": {
-          "title": "Ponctualité",
-          "desc": "Nous valorisons votre temps. Nos chauffeurs sont toujours à l'heure pour vous assurer d'arriver à destination sans retard."
+        "airports": {
+          "title": "Transfert aéroports",
+          "desc": "CDG Roissy, Orly et Le Bourget. Attente offerte et suivi des vols en temps réel. Service disponible 24h/24.",
+          "price": "À partir de 80€"
         },
-        "flexibility": {
-          "title": "Flexibilité",
-          "desc": "Adaptable à vos besoins. Que ce soit un changement de dernière minute ou un itinéraire spécifique, nous répondons à vos demandes."
+        "stations": {
+          "title": "Transfert gares parisiennes",
+          "desc": "Gare du Nord, Gare de Lyon, Montparnasse, Gare de l'Est, Saint-Lazare. Attente gratuite en cas de retard.",
+          "price": "À partir de 60€"
         },
-        "hygiene": {
-          "title": "Hygiène",
-          "desc": "Propreté immaculée. Nos véhicules sont régulièrement désinfectés et entretenus selon les normes d'hygiène les plus élevées."
-        },
-        "security": {
-          "title": "Sécurité",
-          "desc": "Votre sécurité est notre priorité. Des chauffeurs vérifiés et des trajets suivis assurent un voyage en toute sécurité à chaque fois."
-        },
-        "comfort": {
-          "title": "Confort",
-          "desc": "Roulez avec style et détente. Notre flotte premium offre un confort maximal pour une expérience de voyage agréable."
-        },
-        "professionalism": {
-          "title": "Professionnalisme",
-          "desc": "Un service expert de confiance. Nos chauffeurs courtois et expérimentés fournissent un service de premier ordre."
+        "paris": {
+          "title": "Transfert Paris",
+          "desc": "Domicile, bureau, hôtel ou rendez-vous pro. Paris intra-muros et petite couronne, avec prix fixe.",
+          "price": "À partir de 60€"
         }
       }
     },
@@ -323,5 +350,294 @@
       "address_required": "Veuillez sélectionner les deux adresses avant de réserver."
     },
     "map_loading": "Chargement de la carte…"
+  },
+  "airports_page": {
+    "cdg": {
+      "hero_title": "Transfert Aéroport CDG Roissy",
+      "hero_subtitle": "Terminal 1, 2 & 3 — Tarif fixe, suivi des vols en temps réel, attente gratuite.",
+      "price_badge": "100€ Prix fixe",
+      "price_label": "Paris → CDG (Tous terminaux)",
+      "details_title": "Détails du trajet",
+      "details": [
+        { "label": "PRIX", "value": "100€", "subtext": "Prix fixe · Pas de frais cachés" },
+        { "label": "DISTANCE", "value": "~30 km", "subtext": "Depuis Paris intra-muros" },
+        { "label": "TEMPS DE TRAJET", "value": "35–45 min", "subtext": "Même aux heures de pointe" },
+        { "label": "DISPONIBILITÉ", "value": "24h/24", "subtext": "7j/7, 365 jours par an" },
+        { "label": "ATTENTE VOL RETARDÉ", "value": "Gratuite", "subtext": "Suivi en temps réel" }
+      ],
+      "why_title": "Pourquoi réserver notre taxi moto CDG ?",
+      "why_points": [
+        "Évitez les embouteillages sur l'A1/A3",
+        "100 € — Prix fixe et garanti",
+        "Gain de temps maximum depuis l'aéroport CDG",
+        "Prise en charge rapide et ponctuelle",
+        "Chauffeurs certifiés et expérimentés",
+        "Suivi des vols en temps réel",
+        "Tarif fixe garanti, pas de surprises",
+        "Service disponible 24h/24 et 7j/7",
+        "Confort et sécurité premium"
+      ],
+      "pickup_title": "Point de rendez-vous à CDG",
+      "pickup_text": "Votre chauffeur vous attend au Terminal 1 — Porte 4, hall des arrivées, avec une pancarte à votre nom.",
+      "booking_title": "Comment réserver — 4 étapes simples",
+      "booking_steps": [
+        { "step": "1", "title": "Choisissez votre trajet", "desc": "Indiquez votre point de départ, destination et horaire." },
+        { "step": "2", "title": "Réservez en ligne ou via WhatsApp", "desc": "Formulaire simple ou contact direct en quelques secondes." },
+        { "step": "3", "title": "Recevez votre confirmation immédiate", "desc": "Détails du chauffeur envoyés instantanément." },
+        { "step": "4", "title": "Votre chauffeur arrive", "desc": "Prise en charge ponctuelle avec service premium." }
+      ],
+      "cta_button": "Réserver mon transfert CDG",
+      "terminals_title": "Tous les terminaux CDG desservis",
+      "terminals_subtitle": "Même tarif prix fixe pour tous les terminaux — Choisissez le vôtre",
+      "terminals": [
+        { "name": "Terminal 1", "desc": "Compagnies internationales - Star Alliance - Emirates - Qatar...", "price": "100€" },
+        { "name": "Terminal 2A", "desc": "Air France Europe - Vols courts et moyens courriers", "price": "100€" },
+        { "name": "Terminal 2B", "desc": "Zone Schengen - Compagnies européennes", "price": "100€" },
+        { "name": "Terminal 2C", "desc": "Air France - Vols domestiques & Europe", "price": "100€" },
+        { "name": "Terminal 2D", "desc": "Compagnies européennes - EasyJet - Austrian Airlines", "price": "100€" },
+        { "name": "Terminal 2E", "desc": "Air France hub principal - Long-courriers & intercontinentaux", "price": "100€" },
+        { "name": "Terminal 2F", "desc": "Partenaires Air France - HOP! - Vueling - Hop Air", "price": "100€" },
+        { "name": "Terminal 3", "desc": "Charters & low-cost - Ryanair - EasyJet (CDG)", "price": "100€" }
+      ]
+    },
+    "orly": {
+      "hero_title": "Transfert Aéroport d'Orly",
+      "hero_subtitle": "Tous les halls (1, 2, 3 & 4) — Tarif fixe, attente gratuite, suivi des vols inclus.",
+      "price_badge": "80€ Prix fixe",
+      "price_label": "Paris → Orly (Tous les halls)",
+      "details_title": "Détails du trajet",
+      "details": [
+        { "label": "PRIX", "value": "80€", "subtext": "Prix fixe · Pas de frais cachés" },
+        { "label": "DISTANCE", "value": "14–20 km", "subtext": "Depuis Paris intra-muros" },
+        { "label": "TEMPS DE TRAJET", "value": "~20 min", "subtext": "Même aux heures de pointe" },
+        { "label": "DISPONIBILITÉ", "value": "24h/24", "subtext": "7j/7, 365 jours par an" },
+        { "label": "ATTENTE VOL RETARDÉ", "value": "Gratuite", "subtext": "Suivi en temps réel" }
+      ],
+      "why_title": "Pourquoi réserver notre moto taxi pour Orly ?",
+      "why_points": [
+        "Évitez les embouteillages sur l'A6",
+        "Seulement 20 minutes du sud de Paris",
+        "Tarif fixe de 80 € — aucune surprise",
+        "Suivi des vols en temps réel à Orly",
+        "Aucun frais supplémentaire en cas de retard de vol"
+      ],
+      "pickup_title": "Point de rendez-vous à Orly",
+      "pickup_text": "Votre chauffeur vous attend dans le hall des arrivées de votre terminal, avec une pancarte à votre nom.",
+      "booking_title": "Comment réserver — 4 étapes simples",
+      "booking_steps": [
+        { "step": "1", "title": "Choisissez votre trajet", "desc": "Indiquez votre point de départ, destination et horaire." },
+        { "step": "2", "title": "Réservez en ligne ou via WhatsApp", "desc": "Formulaire simple ou contact direct en quelques secondes." },
+        { "step": "3", "title": "Recevez votre confirmation immédiate", "desc": "Détails du chauffeur envoyés instantanément." },
+        { "step": "4", "title": "Votre chauffeur arrive", "desc": "Prise en charge ponctuelle avec service premium." }
+      ],
+      "cta_button": "Réserver mon transfert Orly",
+      "terminals_title": "Tous les terminaux Orly desservis",
+      "terminals_subtitle": "Même tarif prix fixe pour tous les terminaux — Choisissez le vôtre",
+      "terminals": [
+        { "name": "Orly 1", "desc": "Air France - Air Corsica - TAP Air Portugal", "price": "80€" },
+        { "name": "Orly 2", "desc": "Air France - Compagnies européennes", "price": "80€" },
+        { "name": "Orly 3", "desc": "Transavia - Air France (Long-courrier)", "price": "80€" },
+        { "name": "Orly 4", "desc": "French Bee - Corsair - Royal Air Maroc", "price": "80€" }
+      ]
+    }
+  },
+  "stations_page": {
+    "gare_du_nord": {
+      "hero_title": "Taxi Moto Gare Du Nord",
+      "hero_subtitle": "1ère gare d'Europe — Prise en charge Rue de Dunkerque, prix fixe garanti, attente retard train gratuite, disponible 24h/24",
+      "price_badge": "60€ Prix fixe",
+      "price_label": "Paris ↔ Gare du Nord",
+      "details": [
+        { "label": "PRIX", "value": "60€", "subtext": "Prix fixe · Aucun supplément" },
+        { "label": "TEMPS DE TRAJET", "value": "20–30 min", "subtext": "Depuis n'importe où dans Paris" },
+        { "label": "DISPONIBILITÉ", "value": "24h/24", "subtext": "7j/7 - Aucun supplément nuit" },
+        { "label": "RETARD TRAIN", "value": "Gratuite", "subtext": "Suivi SNCF en temps réel" }
+      ],
+      "why_title": "Pourquoi réserver notre moto taxi Gare du Nord ?",
+      "why_points": [
+        "Évitez les embouteillages autour de la Gare du Nord",
+        "Prise en charge ponctuelle Rue de Dunkerque",
+        "Tarif fixe de 60 € — aucune surprise",
+        "Suivi des trains en temps réel",
+        "Service disponible 24h/24"
+      ],
+      "meeting_title": "Point de rendez-vous à la Gare du Nord",
+      "meeting_desc": "Sortie principale — Rue de Dunkerque. Votre chauffeur vous attendra avec une pancarte à votre nom.",
+      "booking_title": "Réservez en quelques clics",
+      "booking_steps": [
+        { "step": "1", "title": "Choisissez votre trajet", "desc": "Indiquez votre point de départ, destination et horaire." },
+        { "step": "2", "title": "Réservez en ligne ou via WhatsApp", "desc": "Formulaire simple ou contact direct en quelques secondes." },
+        { "step": "3", "title": "Recevez votre confirmation immédiate", "desc": "Détails du chauffeur envoyés instantanément." },
+        { "step": "4", "title": "Votre chauffeur arrive", "desc": "Prise en charge ponctuelle avec service premium." }
+      ],
+      "cta_button": "Réserver mon transfert"
+    },
+    "gare_de_lyon": {
+      "hero_title": "Taxi Moto Gare De Lyon",
+      "hero_subtitle": "Porte du Sud — Marseille, Nice, Lyon, Genève, Turin — Prise en charge Boulevard Diderot, prix fixe garanti, attente retard train gratuite, disponible 24h/24",
+      "price_badge": "60€ Prix fixe",
+      "price_label": "Paris ↔ Gare de Lyon",
+      "details": [
+        { "label": "PRIX", "value": "60€", "subtext": "Prix fixe · Aucun supplément" },
+        { "label": "TEMPS DE TRAJET", "value": "15–25 min", "subtext": "Depuis n'importe où dans Paris" },
+        { "label": "DISPONIBILITÉ", "value": "24h/24", "subtext": "7j/7 - Aucun supplément nuit" },
+        { "label": "RETARD TRAIN", "value": "Gratuite", "subtext": "Suivi SNCF en temps réel" }
+      ],
+      "why_title": "Pourquoi réserver notre moto taxi Gare de Lyon ?",
+      "why_points": [
+        "Évitez les embouteillages autour de la Gare de Lyon",
+        "Prise en charge facile Boulevard Diderot",
+        "Tarif fixe de 60 € — aucune surprise",
+        "Suivi des trains en temps réel",
+        "Connexion directe aux TGV Sud-Est"
+      ],
+      "meeting_title": "Point de rendez-vous à la Gare de Lyon",
+      "meeting_desc": "Porte du Sud — Boulevard Diderot. Votre chauffeur vous attendra avec une pancarte à votre nom.",
+      "booking_title": "Réservez en quelques clics",
+      "booking_steps": [
+        { "step": "1", "title": "Choisissez votre trajet", "desc": "Indiquez votre point de départ, destination et horaire." },
+        { "step": "2", "title": "Réservez en ligne ou via WhatsApp", "desc": "Formulaire simple ou contact direct en quelques secondes." },
+        { "step": "3", "title": "Recevez votre confirmation immédiate", "desc": "Détails du chauffeur envoyés instantanément." },
+        { "step": "4", "title": "Votre chauffeur arrive", "desc": "Prise en charge ponctuelle avec service premium." }
+      ],
+      "cta_button": "Réserver mon transfert"
+    },
+    "gare_de_l_est": {
+      "hero_title": "Taxi Moto Gare De L'Est",
+      "hero_subtitle": "Porte de l'Est — Strasbourg, Nancy, Reims — Prise en charge Boulevard de Strasbourg, prix fixe garanti, attente retard train gratuite, disponible 24h/24",
+      "price_badge": "60€ Prix fixe",
+      "price_label": "Paris ↔ Gare de l'Est",
+      "details": [
+        { "label": "PRIX", "value": "60€", "subtext": "Prix fixe · Aucun supplément" },
+        { "label": "TEMPS DE TRAJET", "value": "15–25 min", "subtext": "Depuis n'importe où dans Paris" },
+        { "label": "DISPONIBILITÉ", "value": "24h/24", "subtext": "7j/7 - Aucun supplément nuit" },
+        { "label": "RETARD TRAIN", "value": "Gratuite", "subtext": "Suivi SNCF en temps réel" }
+      ],
+      "why_title": "Pourquoi réserver notre moto taxi Gare de l'Est ?",
+      "why_points": [
+        "Évitez les embouteillages autour de la Gare de l'Est",
+        "Prise en charge pratique Boulevard de Strasbourg",
+        "Tarif fixe de 60 € — aucune surprise",
+        "Suivi des trains en temps réel",
+        "Service professionnel pour les voyageurs"
+      ],
+      "meeting_title": "Point de rendez-vous à la Gare de l'est",
+      "meeting_desc": "Sortie principale — Boulevard de Strasbourg. Votre chauffeur vous attendra avec une pancarte à votre nom.",
+      "booking_title": "Réservez en quelques clics",
+      "booking_steps": [
+        { "step": "1", "title": "Choisissez votre trajet", "desc": "Indiquez votre point de départ, destination et horaire." },
+        { "step": "2", "title": "Réservez en ligne ou via WhatsApp", "desc": "Formulaire simple ou contact direct en quelques secondes." },
+        { "step": "3", "title": "Recevez votre confirmation immédiate", "desc": "Détails du chauffeur envoyés instantanément." },
+        { "step": "4", "title": "Votre chauffeur arrive", "desc": "Prise en charge ponctuelle avec service premium." }
+      ],
+      "cta_button": "Réserver mon transfert"
+    },
+    "gare_montparnasse": {
+      "hero_title": "Taxi Moto Gare Montparnasse",
+      "hero_subtitle": "Porte de l'Ouest — Bordeaux, Nantes, Rennes, Brest — Prise en charge Boulevard de Vaugirard, prix fixe garanti, attente retard train gratuite, disponible 24h/24",
+      "price_badge": "60€ Prix fixe",
+      "price_label": "Paris ↔ Gare Montparnasse",
+      "details": [
+        { "label": "PRIX", "value": "60€", "subtext": "Prix fixe · Aucun supplément" },
+        { "label": "TEMPS DE TRAJET", "value": "15–25 min", "subtext": "Depuis n'importe où dans Paris" },
+        { "label": "DISPONIBILITÉ", "value": "24h/24", "subtext": "7j/7 - Aucun supplément nuit" },
+        { "label": "RETARD TRAIN", "value": "Gratuite", "subtext": "Suivi SNCF en temps réel" }
+      ],
+      "why_title": "Pourquoi réserver notre moto taxi Gare Montparnasse ?",
+      "why_points": [
+        "Évitez les embouteillages autour de Montparnasse",
+        "Prise en charge rapide Boulevard de Vaugirard",
+        "Tarif fixe de 60 € — aucune surprise",
+        "Suivi des trains en temps réel",
+        "Idéal pour vos déplacements d'affaires vers l'Ouest"
+      ],
+      "meeting_title": "Point de rendez-vous à la Gare de Montparnasse",
+      "meeting_desc": "Sortie principale — Boulevard de Vaugirard. Votre chauffeur vous attendra avec une pancarte à votre nom.",
+      "booking_title": "Réservez en quelques clics",
+      "booking_steps": [
+        { "step": "1", "title": "Choisissez votre trajet", "desc": "Indiquez votre point de départ, destination et horaire." },
+        { "step": "2", "title": "Réservez en ligne ou via WhatsApp", "desc": "Formulaire simple ou contact direct en quelques secondes." },
+        { "step": "3", "title": "Recevez votre confirmation immédiate", "desc": "Détails du chauffeur envoyés instantanément." },
+        { "step": "4", "title": "Votre chauffeur arrive", "desc": "Prise en charge ponctuelle avec service premium." }
+      ],
+      "cta_button": "Réserver mon transfert"
+    }
+  },
+  "various_page": {
+    "passport": {
+      "hero_title": "Passeport oublié ? Nous intervenons rapidement.",
+      "hero_subtitle": "Service de récupération de documents rapide et fiable — pour ne jamais rater votre vol.",
+      "content_title": "Une solution rapide et fiable",
+      "content_text": "Vous avez oublié votre passeport avant un vol important ? Notre chauffeur peut intervenir rapidement pour récupérer votre passeport ou tout document essentiel à votre domicile, hôtel ou tout autre lieu à Paris et en Île-de-France, et vous le remettre dans les meilleurs délais pour voyager en toute sérénité.",
+      "features": [
+        "Dépêche rapide — chauffeur en route en quelques minutes",
+        "Collecte depuis toute adresse à Paris & Île-de-France",
+        "Disponible 24h/24, 7j/7, tous les jours de l'année",
+        "Suivi en temps réel et contact direct avec le chauffeur",
+        "Service discret, professionnel et entièrement assuré"
+      ],
+      "cta_button": "Demander une intervention urgente",
+      "cta_subtitle": "Ne paniquez pas — appelez-nous ou écrivez-nous sur WhatsApp et nous réglons ça."
+    },
+    "visit_paris": {
+      "hero_title": "Visitez Paris en moto",
+      "hero_subtitle": "Une façon unique et flexible de découvrir la capitale avec un chauffeur-guide professionnel.",
+      "content_title": "Liberté, rapidité & style",
+      "content_text": "Vivez Paris autrement — traversez les grands boulevards, découvrez des trésors cachés et atteignez chaque monument sans les embouteillages ni les problèmes de stationnement. Notre service de visite en moto-taxi vous offre des itinéraires personnalisés adaptés à vos envies.",
+      "features": [
+        "Itinéraires flexibles et personnalisés",
+        "Sites emblématiques : Tour Eiffel, Notre-Dame, Montmartre & plus",
+        "Zéro embouteillage — explorez à votre rythme",
+        "Options demi-journée et journée complète disponibles",
+        "Disponible pour individuels, couples et petits groupes"
+      ],
+      "provision_title": "Options de réservation flexibles",
+      "provisions": [
+        { "label": "1 heure de balade", "price": "À partir de 60€" },
+        { "label": "Demi-journée (4 heures)", "price": "À partir de 200€" },
+        { "label": "Journée complète (8 heures)", "price": "À partir de 350€" },
+        { "label": "Itinéraire personnalisé", "price": "Sur demande" }
+      ],
+      "cta_button": "Planifier ma visite de Paris",
+      "cta_subtitle": "Contactez-nous via WhatsApp ou par téléphone et nous construirons votre itinéraire parfait."
+    }
+  },
+  "process": {
+    "urgency": "Départ en moins d'une heure ? Contactez-nous directement",
+    "steps": [
+      {
+        "title": "Réservez en 2 mins",
+        "desc": "En ligne, via WhatsApp ou par téléphone, avec confirmation instantanée."
+      },
+      {
+        "title": "Planifiez votre trajet",
+        "desc": "Sélectionnez votre lieu de prise en charge, destination et heure sur notre plateforme, ou contactez-nous directement."
+      },
+      {
+        "title": "Confirmation par SMS",
+        "desc": "Confirmation immédiate via WhatsApp avec les détails du chauffeur."
+      },
+      {
+        "title": "Votre chauffeur arrive dans 10 mins",
+        "desc": "Un chauffeur ponctuel et entièrement équipé arrive pour vous chercher."
+      }
+    ]
+  },
+  "zones": {
+    "title": "Zones desservies",
+    "cards": [
+      {
+        "title": "Aéroports",
+        "tags": ["CDG T1", "CDG T2", "CDG T3", "Orly Sud", "Orly Ouest", "Le Bourget"]
+      },
+      {
+        "title": "Gares Parisiennes",
+        "tags": ["Gare du Nord", "Gare de Lyon", "Montparnasse", "Gare de l'Est", "Saint-Lazare", "Bercy"]
+      },
+      {
+        "title": "Paris & IDF",
+        "tags": ["Paris 1er–20e", "Hauts-de-Seine", "Seine-Saint-Denis", "Val-de-Marne", "Essonne", "Yvelines"]
+      }
+    ]
   }
 }

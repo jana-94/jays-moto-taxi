@@ -13,7 +13,8 @@ import {
   FiCheckCircle,
   FiArrowRight,
 } from 'react-icons/fi';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import Script from 'next/script';
 import { useLanguage } from '@/app/context/LanguageContext';
@@ -22,34 +23,83 @@ import RouteMap from './booking/RouteMap';
 
 // ─── Pricing helpers ─────────────────────────────────────────────────────────
 function parseKm(distanceText: string): number {
-  // distanceText may be "12.3 km" or "1,234 km" or "800 m"
-  const lower = distanceText.toLowerCase();
+  const lower = distanceText.toLowerCase().trim();
+  
   if (lower.includes('m') && !lower.includes('km')) {
-    // metres
     const m = parseFloat(lower.replace(/[^0-9.]/g, ''));
     return m / 1000;
   }
-  const km = parseFloat(lower.replace(/[^0-9.]/g, ''));
+  
+  // ✅ Handle both "34.6 km" (en) and "34,6 km" (fr) formats
+  const normalized = lower
+    .replace(/\s/g, '')        // remove spaces
+    .replace(/[^\d.,]/g, '')   // keep digits, dot, comma only
+    .replace(',', '.');         // convert French comma to decimal point
+  
+  const km = parseFloat(normalized);
   return isNaN(km) ? 0 : km;
 }
 
-function calculateFare(km: number, luggage: number, roundTrip: boolean): number {
+function calculateFare(km: number): number {
   const base = 25;
-  const perKm = km * 2;
-  const luggageFee = luggage > 0 ? 20 : 0;
-  const subtotal = base + perKm + luggageFee;
-  return roundTrip ? subtotal * 2 : subtotal;
+  const perKm = km * 2.5;
+  return base + perKm;
 }
+
+// ─── Fixed Fare Logic ────────────────────────────────────────────────────────
+const FIXED_FARE_LOCATIONS = [
+  { keywords: ['charles de gaulle', 'cdg'], price: 100 },
+  { keywords: ['orly'], price: 80 },
+  { keywords: ['gare du nord'], price: 60 },
+  { keywords: ['gare de lyon'], price: 60 },
+  { keywords: ['gare de l\'est'], price: 60 },
+  { keywords: ['montparnasse'], price: 60 },
+];
+
+function isParis(address: string): boolean {
+  const lower = address.toLowerCase();
+  // Matches "Paris" and either a 75xxx postal code (Paris city) or "Paris, France"
+  return lower.includes('paris') && (/\b75\d{3}\b/.test(lower) || lower.includes('paris, france'));
+}
+
+function getFixedFare(origin: string, destination: string): number | null {
+  const o = origin.toLowerCase();
+  const d = destination.toLowerCase();
+
+  for (const loc of FIXED_FARE_LOCATIONS) {
+    const isOriginLoc = loc.keywords.some(k => o.includes(k));
+    const isDestLoc = loc.keywords.some(k => d.includes(k));
+    const isOriginParis = isParis(o);
+    const isDestParis = isParis(d);
+
+    if ((isOriginParis && isDestLoc) || (isOriginLoc && isDestParis)) {
+      return loc.price;
+    }
+  }
+  return null;
+}
+
 
 // ─── Component ───────────────────────────────────────────────────────────────
 export default function ReservationSection() {
+  return (
+    <Suspense fallback={<div className="h-[600px] flex items-center justify-center">Loading...</div>}>
+      <ReservationContent />
+    </Suspense>
+  );
+}
+
+function ReservationContent() {
   const { t } = useLanguage();
+  const searchParams = useSearchParams();
   const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || '';
 
   // Google Maps load state
   const [isMapLoaded, setIsMapLoaded] = useState(
-  () => typeof window !== 'undefined' && typeof window.google !== 'undefined'
-);
+    () => typeof window !== 'undefined' && typeof window.google !== 'undefined'
+  );
+
+  const today = new Date().toLocaleDateString('en-CA'); // YYYY-MM-DD in local time
 
   // Step 1 — Fare Estimator state
   const [originLatLng, setOriginLatLng] = useState<google.maps.LatLngLiteral | null>(null);
@@ -71,6 +121,52 @@ export default function ReservationSection() {
   const [mobile, setMobile] = useState('');
   const [description, setDescription] = useState('');
   const [bookingStatus, setBookingStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+
+
+  // URL Parameter Handling
+  useEffect(() => {
+    const pickup = searchParams.get('pickup');
+    const dropoff = searchParams.get('dropoff');
+    const fare = searchParams.get('fare');
+    const luggageParam = searchParams.get('luggage');
+
+    if (pickup) setOriginText(pickup);
+    if (dropoff) setDestinationText(dropoff);
+
+    if (fare) {
+      // Parse numerical value from string (e.g., "100€" or "€100")
+      const numericFare = parseFloat(fare.replace(/[^0-9.]/g, ''));
+      if (!isNaN(numericFare)) {
+        const luggageFee = luggage > 0 ? 20 : 0;
+        const effectiveOneWay = Math.max(60, Math.round(numericFare * 100) / 100);
+        
+        // On redirect we assume single trip unless set otherwise, 
+        // but let's use the current tripType to be safe.
+        const fareTotal = tripType === 'round-trip' ? (effectiveOneWay + luggageFee) * 2 : (effectiveOneWay + luggageFee);
+        
+        setEstimatedFare(fareTotal);
+        setFareCalculated(true);
+      }
+    }
+    if (pickup || dropoff || fare || luggageParam) {
+      // Clear URL parameters after processing to ensure a clean reload
+      const newUrl = window.location.pathname;
+      window.history.replaceState({}, '', newUrl);
+    }
+  }, [searchParams]);
+
+  // Add this helper
+function formatDateDisplay(dateStr: string): string {
+  if (!dateStr) return '';
+  const [year, month, day] = dateStr.split('-');
+  return `${day}/${month}/${year}`; // Always DD/MM/YYYY
+}
+
+// In your ReadonlyField for date (Step 2):
+<ReadonlyField 
+  label={t('reservation.date_pickup')} 
+  value={formatDateDisplay(date)}  // ✅ consistent display
+/>
 
   // Route update callbacks (memoised to avoid re-render loops in RouteMap)
   const handleOriginSelected = useCallback(
@@ -102,13 +198,101 @@ export default function ReservationSection() {
     setRouteInfo(info);
   }, []);
 
+  // Recalculate fare when luggage changes (avoids disabling the button)
+  const handleLuggageChange = (newLuggage: number) => {
+    setLuggage(newLuggage);
+    if (fareCalculated) {
+      const luggageFee = newLuggage > 0 ? 20 : 0;
+
+      // Try fixed fare first (works even without routeInfo, e.g. on redirect)
+      const fixedBase = getFixedFare(originText, destinationText);
+      if (fixedBase !== null) {
+        const effectiveOneWay = Math.max(60, Math.round(fixedBase * 100) / 100);
+        const oneWayTotal = effectiveOneWay + luggageFee;
+        setEstimatedFare(tripType === 'round-trip' ? oneWayTotal * 2 : oneWayTotal);
+      } else if (routeInfo) {
+        const oneWayBase = calculateFare(parseKm(routeInfo.distance));
+        const effectiveOneWay = Math.max(60, Math.round(oneWayBase * 100) / 100);
+        const oneWayTotal = effectiveOneWay + luggageFee;
+        setEstimatedFare(tripType === 'round-trip' ? oneWayTotal * 2 : oneWayTotal);
+      }
+      // Fallback: directly adjust the per-leg luggage fee on the current estimate
+      else if (estimatedFare !== null) {
+        const isRound = tripType === 'round-trip';
+        const multiplier = isRound ? 2 : 1;
+        
+        const prevLuggageTotal = (luggage > 0 ? 20 : 0) * multiplier;
+        const newLuggageTotal = (newLuggage > 0 ? 20 : 0) * multiplier;
+        
+        const basePart = estimatedFare - prevLuggageTotal;
+        setEstimatedFare(basePart + newLuggageTotal);
+      }
+    } else {
+      setFareCalculated(false);
+      setEstimatedFare(null);
+    }
+  };
+
+  // Recalculate fare when trip type changes (avoids disabling the button)
+  const handleTripTypeChange = (newType: 'single' | 'round-trip') => {
+    setTripType(newType);
+    if (fareCalculated) {
+      const luggageFee = luggage > 0 ? 20 : 0;
+      const multiplier = newType === 'round-trip' ? 2 : 1;
+
+      // Try fixed fare first (works even without routeInfo, e.g. on redirect)
+      const fixedBase = getFixedFare(originText, destinationText);
+      if (fixedBase !== null) {
+        const effectiveOneWay = Math.max(60, Math.round(fixedBase * 100) / 100);
+        const oneWayTotal = effectiveOneWay + luggageFee;
+        setEstimatedFare(oneWayTotal * multiplier);
+      } else if (routeInfo) {
+        const oneWayBase = calculateFare(parseKm(routeInfo.distance));
+        const effectiveOneWay = Math.max(60, Math.round(oneWayBase * 100) / 100);
+        const oneWayTotal = effectiveOneWay + luggageFee;
+        setEstimatedFare(oneWayTotal * multiplier);
+      }
+      // Fallback: directly adjust based on the current one-way base
+      else if (estimatedFare !== null) {
+        const wasRound = tripType === 'round-trip';
+        const prevMultiplier = wasRound ? 2 : 1;
+        
+        const oneWayTotal = estimatedFare / prevMultiplier;
+        setEstimatedFare(oneWayTotal * multiplier);
+      }
+    } else {
+      setFareCalculated(false);
+      setEstimatedFare(null);
+    }
+  };
+
   // Step 1 → Fare Estimate
   const handleEstimate = (e: React.FormEvent) => {
     e.preventDefault();
     if (!routeInfo) return;
-    const km = parseKm(routeInfo.distance);
-    const fare = calculateFare(km, luggage, tripType === 'round-trip');
-    setEstimatedFare(Math.round(fare * 100) / 100);
+
+    // Check for fixed fare override
+    const fixedBase = getFixedFare(originText, destinationText);
+    let oneWayBase: number;
+
+    if (fixedBase !== null) {
+      oneWayBase = fixedBase;
+    } else {
+      const km = parseKm(routeInfo.distance);
+      oneWayBase = calculateFare(km);
+    }
+
+    // Apply 60€ minimum to ONE WAY base transfer, then add luggage
+    const effectiveOneWay = Math.max(60, Math.round(oneWayBase * 100) / 100);
+    const luggageFee = luggage > 0 ? 20 : 0;
+    
+    // Total for one leg
+    const oneLegTotal = effectiveOneWay + luggageFee;
+    
+    // Final fare (doubled if round trip)
+    const finalFare = tripType === 'round-trip' ? oneLegTotal * 2 : oneLegTotal;
+
+    setEstimatedFare(finalFare);
     setFareCalculated(true);
   };
 
@@ -152,8 +336,8 @@ export default function ReservationSection() {
     }
   };
 
-  const canSubmitBooking = name.trim() && email.trim() && mobile.trim();
-  const canEstimate = !!routeInfo; // need a valid route from Google Maps
+  const canSubmitBooking = name.trim() && email.trim() && mobile.trim() && date && time;
+  const canEstimate = !!routeInfo && date && time; // need a valid route from Google Maps and date/time
 
   return (
     <section id="reservation" className="section bg-base py-0">
@@ -252,7 +436,7 @@ export default function ReservationSection() {
                                 name="tripType"
                                 className="hidden"
                                 checked={tripType === type}
-                                onChange={() => { setTripType(type); setFareCalculated(false); setEstimatedFare(null); }}
+                                onChange={() => handleTripTypeChange(type)}
                               />
                               <span className="text-sm text-ink-softer group-hover:text-ink transition-colors capitalize">
                                 {type === 'single' ? t('reservation.labels.one_way') : t('reservation.labels.round_trip')}
@@ -269,12 +453,14 @@ export default function ReservationSection() {
                               placeholder={t('reservation.placeholders.location')}
                               onPlaceSelected={handleOriginSelected}
                               onValueChange={setOriginText}
+                              value={originText}
                             />
                             <LocationInput
                               label={t('reservation.labels.end_address')}
                               placeholder={t('reservation.placeholders.location')}
                               onPlaceSelected={handleDestinationSelected}
                               onValueChange={setDestinationText}
+                              value={destinationText}
                             />
                           </>
                         )}
@@ -297,6 +483,7 @@ export default function ReservationSection() {
                                 type="date"
                                 value={date}
                                 onChange={(e) => setDate(e.target.value)}
+                                min={today}
                                 required
                                 className="w-full pl-9 pr-3 py-3 rounded border border-base-border bg-base focus:border-brand focus:ring-1 focus:ring-brand outline-none text-sm text-ink"
                               />
@@ -330,7 +517,7 @@ export default function ReservationSection() {
                               <div
                                 className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-colors ${luggage === 0 ? 'border-brand bg-brand/10' : 'border-base-border'
                                   }`}
-                                onClick={() => { setLuggage(0); setFareCalculated(false); setEstimatedFare(null); }}
+                                onClick={() => handleLuggageChange(0)}
                               >
                                 {luggage === 0 && <div className="w-2.5 h-2.5 rounded-sm bg-brand" />}
                               </div>
@@ -341,7 +528,7 @@ export default function ReservationSection() {
                               <div
                                 className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-colors ${luggage === 1 ? 'border-brand bg-brand/10' : 'border-base-border'
                                   }`}
-                                onClick={() => { setLuggage(1); setFareCalculated(false); setEstimatedFare(null); }}
+                                onClick={() => handleLuggageChange(1)}
                               >
                                 {luggage === 1 && <div className="w-2.5 h-2.5 rounded-sm bg-brand" />}
                               </div>
@@ -351,13 +538,14 @@ export default function ReservationSection() {
                           </div>
                         </div>
 
-                        {/* Route distance info */}
-                        {routeInfo && (
-                          <div className="bg-brand/10 border border-brand/20 rounded-lg px-4 py-2 flex items-center justify-between text-sm">
-                            <span className="text-ink font-medium">📍 {routeInfo.distance}</span>
-                            <span className="text-ink-softer">🕐 {routeInfo.duration}</span>
+                        {/* Fare Disclaimer */}
+                        
+                          <div className="bg-brand/10 border border-brand/20 rounded-lg px-4 py-3">
+                            <p className="text-xs text-brand font-medium italic text-center">
+                              {t('reservation.fare_disclaimer')}
+                            </p>
                           </div>
-                        )}
+                        
 
                         {/* Estimated Fare badge */}
                         <AnimatePresence>
@@ -372,7 +560,7 @@ export default function ReservationSection() {
                               <p className="text-xs text-ink-softer uppercase tracking-wide mb-1">{t('reservation.estimated_fare')}</p>
                               <p className="text-3xl font-black text-brand">€{estimatedFare}</p>
                               {/* <p className="text-xs text-ink-softer mt-1">
-                                Base €25 + {parseKm(routeInfo?.distance || '0 km').toFixed(1)} km × €2
+                                Base €25 + {parseKm(routeInfo?.distance || '0 km').toFixed(1)} km × €2.5
                                 {luggage > 0 ? t('reservation.fare_luggage') : ''}
                                 {tripType === 'round-trip' ? t('reservation.fare_round_trip') : ''}
                               </p> */}
@@ -393,7 +581,8 @@ export default function ReservationSection() {
                           <button
                             type="button"
                             onClick={handleGoToBooking}
-                            className="w-full bg-brand hover:bg-brand-dark text-black font-bold py-4 rounded shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-2"
+                            disabled={!date || !time}
+                            className="w-full bg-brand hover:bg-brand-dark disabled:opacity-40 disabled:cursor-not-allowed text-black font-bold py-4 rounded shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-2"
                           >
                             {t('reservation.book_now')} <FiArrowRight size={16} />
                           </button>

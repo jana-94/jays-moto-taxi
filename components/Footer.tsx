@@ -15,14 +15,14 @@ const Footer = () => {
         <Link className="flex flex-col items-start leading-none justify-center items-center" href='/'>
           <Image
             className='header-logo'
-            src='/images/logo/logo_latest_white_svg.svg'
+            src='/images/logo/logonew3.png'
             alt='logo'
             width={120}
             height={40}
           />
-          <span className="text-[8px] md:text-[10px] font-[var(--font-poppins)] font-extrabold tracking-tight opacity-90 whitespace-nowrap text-white uppercase">
+          {/* <span className="text-[8px] md:text-[10px] font-[var(--font-poppins)] font-extrabold tracking-tight opacity-90 whitespace-nowrap text-white uppercase">
             {t('nav.slogan')}
-          </span>
+          </span> */}
         </Link>
         {/* <div className='social'>
           <Link href='/' className='social-icon-outer'>

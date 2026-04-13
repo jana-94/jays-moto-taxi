@@ -1,8 +1,8 @@
 'use client';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useScrollSpy } from '@/lib/useScrollSpy';
-import { FiMenu, FiX, FiPhone } from 'react-icons/fi';
+import { FiMenu, FiX, FiPhone, FiChevronDown } from 'react-icons/fi';
 import { FaWhatsapp } from 'react-icons/fa';
 import { ThemeToggle } from './ThemeToggle';
 import LanguageSwitcher from './LanguageSwitcher';
@@ -19,36 +19,67 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setMounted(true);
-    const handleScroll = () => setScrolled(window.scrollY > 50);
+    const handleScroll = () => setScrolled(window.scrollY > 0);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setOpenDropdown(null);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
   const navItems = [
     { id: 'home', label: t('nav.home'), href: '/' },
     { id: 'services', label: t('nav.services'), href: '/services' },
-    { id: 'pricing', label: t('nav.pricing'), href: '/#pricing' },
+    // { id: 'pricing', label: t('nav.pricing'), href: '/#pricing' },
     { id: 'reservation', label: t('nav.reservation'), href: '/#reservation' },
     { id: 'contact', label: t('nav.contact'), href: '/contact' },
   ];
 
+  const dropdownItems = [
+    {
+      id: 'airports',
+      label: t('nav.airports'),
+      subItems: [
+        { label: t('CDG'), href: '/airports/cdg' },
+        { label: t('ORLY'), href: '/airports/orly' },
+      ],
+    },
+    {
+      id: 'stations',
+      label: t('nav.stations'),
+      subItems: [
+        { label: t('nav.gare_du_nord'), href: '/stations/gare-du-nord' },
+        { label: t('nav.gare_de_lyon'), href: '/stations/gare-de-lyon' },
+        { label: t('nav.gare_de_l_est'), href: '/stations/gare-de-l-est' },
+        { label: t('nav.montparnasse'), href: '/stations/gare-montparnasse' },
+      ],
+    },
+  ];
+
   useEffect(() => {
     setOpen(false);
+    setOpenDropdown(null);
+    setMobileExpanded(null);
   }, [active]);
-
-  // Logo logic:
-  // Not mounted (SSR) -> Default white (assuming initial load is top of page)
-  // Top of page (!scrolled) -> White
-  // Scrolled + Dark Mode -> White
-  // Scrolled + Light Mode -> Colored/Black
 
   const isDark = mounted && resolvedTheme === 'dark';
   const logoSrc = (!mounted || !scrolled || isDark)
-    ? '/images/logo/logo_latest_white_svg.svg'
-    : '/images/logo/logo_latest_svg.svg';
+    ? '/images/logo/logonew3.png'
+    : '/images/logo/logonew4.png';
 
   return (
     <header
@@ -57,20 +88,22 @@ export default function Navbar() {
     >
       <nav className="container flex h-20 items-center justify-between">
         <Link href='/' className="flex flex-col items-start leading-none justify-center items-center">
-          <Image
-            className='header-logo '
-            src={logoSrc}
-            alt='logo'
-            width={120}
-            height={40}
-          />
-          <span className="text-[6px] md:text-[8px] pl-2 md:pl-0 mb-0.5 font-[var(--font-poppins)] font-extrabold tracking-tight opacity-90 whitespace-nowrap uppercase">
+         <Image
+  className='header-logo'
+  src={logoSrc}
+  alt='logo'
+  width={200}      // ← increase this from 90 — it's the intrinsic max width
+  height={60}      // ← match your tallest CSS height
+  style={{ width: 'auto' }}   // ← this is the key fix
+/>
+          {/* <span className="text-[6px] md:text-[8px] pl-2 md:pl-0 mb-0.5 font-[var(--font-poppins)] font-extrabold tracking-tight opacity-90 whitespace-nowrap uppercase">
             {t('nav.slogan')}
-          </span>
+          </span> */}
         </Link>
 
-        <div className="flex items-center gap-4">
-          <ul className="hidden md:flex items-center gap-6">
+        <div className="flex items-center gap-4" ref={dropdownRef}>
+          {/* Desktop Nav */}
+          <ul className="hidden lg:flex items-center gap-4">
             {navItems.map((item) => (
               <li key={item.id}>
                 <Link
@@ -82,13 +115,48 @@ export default function Navbar() {
                 </Link>
               </li>
             ))}
+            {/* Dropdown nav items */}
+            {dropdownItems.map((item) => (
+              <li key={item.id} className="relative">
+                <button
+                  className="flex items-center gap-1 text-sm uppercase tracking-wide hover:text-brand transition-colors cursor-pointer"
+                  onClick={() => setOpenDropdown(openDropdown === item.id ? null : item.id)}
+                  onMouseEnter={() => setOpenDropdown(item.id)}
+                  aria-expanded={openDropdown === item.id}
+                  aria-haspopup="true"
+                >
+                  {item.label}
+                  <FiChevronDown
+                    size={14}
+                    className={`transition-transform duration-200 ${openDropdown === item.id ? 'rotate-180' : ''}`}
+                  />
+                </button>
+                {openDropdown === item.id && (
+                  <div
+                    className="absolute left-0 top-full mt-2 w-56 rounded-xl bg-base border border-base-border shadow-lg overflow-hidden z-50"
+                    onMouseLeave={() => setOpenDropdown(null)}
+                  >
+                    {item.subItems.map((sub) => (
+                      <Link
+                        key={sub.href}
+                        href={sub.href}
+                        className="block px-4 py-3 text-sm text-ink hover:bg-brand/10 hover:text-brand transition-colors"
+                        onClick={() => setOpenDropdown(null)}
+                      >
+                        {sub.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </li>
+            ))}
           </ul>
 
-          <div className="hidden lg:flex items-center gap-4 mr-2">
+          <div className="hidden xl:flex items-center gap-4 mr-2">
             <div className="flex items-center gap-2">
               <FiPhone className="text-brand" size={18} />
               <a href="tel:+33684406126" className="text-sm font-semibold hover:text-brand transition-colors whitespace-nowrap">
-                +33 (0)6 84 40 61 26
+                06 84 40 61 26
               </a>
             </div>
             <a
@@ -102,7 +170,7 @@ export default function Navbar() {
             </a>
           </div>
 
-          <div className="hidden md:block">
+          <div className="hidden lg:block">
             <LanguageSwitcher />
           </div>
 
@@ -110,15 +178,17 @@ export default function Navbar() {
 
           <button
             aria-label="Toggle menu"
-            className="md:hidden p-2"
+            className="lg:hidden p-2"
             onClick={() => setOpen((v) => !v)}
           >
             {open ? <FiX size={22} /> : <FiMenu size={22} />}
           </button>
         </div>
       </nav>
+
+      {/* Mobile menu */}
       {open && (
-        <div className="md:hidden bg-base border-t border-base-border text-ink">
+        <div className="lg:hidden bg-base border-t border-base-border text-ink">
           <ul className="container py-4 space-y-1">
             {navItems.map((item) => (
               <li key={item.id}>
@@ -130,6 +200,37 @@ export default function Navbar() {
                 >
                   {item.label}
                 </Link>
+              </li>
+            ))}
+
+            {/* Mobile dropdown items */}
+            {dropdownItems.map((item) => (
+              <li key={item.id}>
+                <button
+                  className="flex items-center justify-between w-full py-3 text-base font-medium text-ink hover:text-brand transition-colors"
+                  onClick={() => setMobileExpanded(mobileExpanded === item.id ? null : item.id)}
+                >
+                  <span>{item.label}</span>
+                  <FiChevronDown
+                    size={16}
+                    className={`transition-transform duration-200 ${mobileExpanded === item.id ? 'rotate-180' : ''}`}
+                  />
+                </button>
+                {mobileExpanded === item.id && (
+                  <ul className="pl-4 pb-2 space-y-1 border-l-2 border-brand/30 ml-2">
+                    {item.subItems.map((sub) => (
+                      <li key={sub.href}>
+                        <Link
+                          href={sub.href}
+                          className="block py-2 text-sm text-ink-softer hover:text-brand transition-colors"
+                          onClick={() => { setOpen(false); setMobileExpanded(null); }}
+                        >
+                          {sub.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </li>
             ))}
           </ul>

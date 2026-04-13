@@ -48,7 +48,7 @@ export default function ProvisionSection() {
                     rel="noopener noreferrer"
                     className="mt-8 inline-block w-full rounded bg-brand px-8 py-4 text-center text-lg font-bold text-black shadow-lg transition-transform hover:-translate-y-1 hover:shadow-xl"
                 >
-                    Contact Us Via WhatsApp
+                    {t('provision.whatsapp_button')}
                 </a>
             </div>
         </section>

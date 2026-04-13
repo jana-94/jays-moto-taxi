@@ -72,7 +72,7 @@ body {
 }
 
 .heading-hero {
-  @apply text-3xl sm:text-4xl md:text-6xl font-bold leading-tight;
+  @apply text-[28px] sm:text-4xl md:text-4xl lg:text-6xl font-bold leading-tight;
 }
 
 .heading-section {
@@ -86,4 +86,36 @@ body {
 /* Ensure anchors account for sticky header */
 [id] {
   scroll-margin-top: 90px;
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* globals.css — add after your existing utilities */
+.header-logo {
+  width: auto;
+  height: 90px;        /* comfortable default for mobile */
+  min-width: 80px;     /* prevents compression */
+  object-fit: contain;
+}
+
+@media (min-width: 768px) {   /* md — tablet */
+  .header-logo {
+    height: 90px;
+    min-width: 90px;
+  }
+}
+
+@media (min-width: 1024px) {  /* lg — desktop */
+  .header-logo {
+    height: 90px;
+    min-width: 90px;
+  }
 }

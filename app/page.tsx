@@ -7,45 +7,35 @@ import ReservationSection from '@/components/ReservationSection';
 import TestimonialSlider from '@/components/TestimonialSlider';
 import ContactForm from '@/components/ContactForm';
 import Footer from '@/components/Footer';
-import { FiClock, FiCompass, FiDroplet, FiShield, FiSmile, FiAward } from 'react-icons/fi';
+import { FiClock, FiCompass, FiDroplet, FiShield, FiSmile, FiAward, FiNavigation, FiMapPin, FiCheckCircle } from 'react-icons/fi';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/app/context/LanguageContext';
 import ProvisionSection from '@/components/ProvisionSection';
+import ProcessSection from '@/components/ProcessSection';
+import ZonesSection from '@/components/ZonesSection';
 
 export default function HomePage() {
   const { t } = useLanguage();
 
   const services = [
     {
-      icon: FiClock,
-      title: t('home_page.services.items.punctuality.title'),
-      description: t('home_page.services.items.punctuality.desc')
+      icon: FiNavigation,
+      title: t('home_page.services.items.airports.title'),
+      description: t('home_page.services.items.airports.desc'),
+      price: t('home_page.services.items.airports.price')
     },
     {
       icon: FiCompass,
-      title: t('home_page.services.items.flexibility.title'),
-      description: t('home_page.services.items.flexibility.desc')
+      title: t('home_page.services.items.stations.title'),
+      description: t('home_page.services.items.stations.desc'),
+      price: t('home_page.services.items.stations.price')
     },
     {
-      icon: FiDroplet,
-      title: t('home_page.services.items.hygiene.title'),
-      description: t('home_page.services.items.hygiene.desc')
-    },
-    {
-      icon: FiShield,
-      title: t('home_page.services.items.security.title'),
-      description: t('home_page.services.items.security.desc')
-    },
-    {
-      icon: FiSmile,
-      title: t('home_page.services.items.comfort.title'),
-      description: t('home_page.services.items.comfort.desc')
-    },
-    {
-      icon: FiAward,
-      title: t('home_page.services.items.professionalism.title'),
-      description: t('home_page.services.items.professionalism.desc')
+      icon: FiMapPin,
+      title: t('home_page.services.items.paris.title'),
+      description: t('home_page.services.items.paris.desc'),
+      price: t('home_page.services.items.paris.price')
     }
   ];
 
@@ -96,6 +86,8 @@ export default function HomePage() {
       <Navbar />
       <main>
         <Hero />
+        <ProcessSection />
+        <ZonesSection />
 
         <section id="services" className="section container">
           <motion.h2
@@ -106,10 +98,32 @@ export default function HomePage() {
           >
             {t('home_page.services.title')}
           </motion.h2>
-          <p className="mt-2 subheading">{t('home_page.services.subtitle')}</p>
+          <div className="mt-6 flex flex-col gap-3 max-w-4xl">
+            {t('home_page.services.subtitle').split('\n\n').map((point: string, idx: number) => (
+              <motion.div 
+                key={idx}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
+                className="flex items-start gap-3"
+              >
+                <FiCheckCircle className="text-brand shrink-0 mt-1.5" size={18} />
+                <p className="text-ink-softer text-base md:text-lg leading-relaxed">
+                  {point}
+                </p>
+              </motion.div>
+            ))}
+          </div>
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {services.map((s) => (
-              <ServicesCard key={s.title} icon={s.icon} title={s.title} description={s.description} />
+              <ServicesCard 
+                key={s.title} 
+                icon={s.icon} 
+                title={s.title} 
+                description={s.description} 
+                price={s.price}
+              />
             ))}
           </div>
         </section>
