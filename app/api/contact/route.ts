@@ -96,15 +96,6 @@ export async function POST(request: NextRequest) {
       userContent = `
         <p>Hi ${name},</p>
         <p>Thank you for choosing Jay's Taxi Moto. We have received your booking request and our team will contact you shortly to confirm.</p>
-        <h3 style="color: #6b7280; font-size: 14px; text-transform: uppercase;">Your Booking Summary:</h3>
-        <table class="details-table">
-          ${(bookingDetails as string).split('\n').map(line => {
-            const [label, ...valParts] = line.split(': ');
-            if (!label || valParts.length === 0) return '';
-            return `<tr><th>${label}</th><td>${valParts.join(': ')}</td></tr>`;
-          }).join('')}
-        </table>
-        <p style="margin-top: 20px;">If you have any urgent questions, feel free to reply to this email or contact us via WhatsApp.</p>
       `;
     } else {
       userContent = `
