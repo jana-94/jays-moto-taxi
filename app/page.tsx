@@ -1,4 +1,5 @@
 'use client';
+import { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import { ServicesCard } from '@/components/ServicesCard';
@@ -76,10 +77,23 @@ export default function HomePage() {
     {
       name: 'Ava Nguyen',
       role: 'Product Manager',
-      imageUrl:
-        'https://images.unsplash.com/photo-1520974658441-4e8430b45c3a?q=80&w=1200&auto=format&fit=crop'
     }
   ];
+
+  useEffect(() => {
+    // Handle scrolling to hash on mount
+    const { hash } = window.location;
+    if (hash) {
+      const id = hash.replace('#', '');
+      const element = document.getElementById(id);
+      if (element) {
+        // Delay ensures components are rendered and layout is relatively stable
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    }
+  }, []);
 
   return (
     <>

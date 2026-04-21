@@ -83,9 +83,11 @@ function getFixedFare(origin: string, destination: string): number | null {
 // ─── Component ───────────────────────────────────────────────────────────────
 export default function ReservationSection() {
   return (
-    <Suspense fallback={<div className="h-[600px] flex items-center justify-center">Loading...</div>}>
-      <ReservationContent />
-    </Suspense>
+    <div id="reservation">
+      <Suspense fallback={<div className="h-[600px] flex items-center justify-center">Loading...</div>}>
+        <ReservationContent />
+      </Suspense>
+    </div>
   );
 }
 
@@ -340,7 +342,7 @@ function formatDateDisplay(dateStr: string): string {
   const canEstimate = !!routeInfo && date && time; // need a valid route from Google Maps and date/time
 
   return (
-    <section id="reservation" className="section bg-base py-0">
+    <section className="section bg-base py-0">
      <Script
   src={`https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`}
   strategy="afterInteractive"
