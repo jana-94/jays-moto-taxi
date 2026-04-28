@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { Inter, Poppins } from 'next/font/google';
-import Script from 'next/script';
+import { ThemeProvider } from '@/components/ThemeProvider';
+import { LanguageProvider } from '@/app/context/LanguageContext';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const poppins = Poppins({
@@ -14,16 +15,16 @@ export const metadata: Metadata = {
   title: 'jays Taxi Moto — Paris & Île-de-France',
   description:
     'Fast, reliable, and secure motorcycle taxi services in Paris and Île-de-France. Available 24/7 for your daily commute and urgent travels.',
-  metadataBase: new URL('https://mototaxi.jays-transport.fr/'),
+  metadataBase: new URL('https://jays-taxi-moto.com'),
   openGraph: {
     title: 'jays Taxi Moto — Paris & Île-de-France',
     description:
       'Fast, reliable, and secure motorcycle taxi services in Paris and Île-de-France. Available 24/7 for your daily commute and urgent travels.',
-    url: 'https://mototaxi.jays-transport.fr/',
+    url: 'https://jays-taxi-moto.com',
     siteName: 'jays Taxi Moto',
     images: [
       {
-        url: '/images/og-image.jpg', // Placeholder, ensure this path exists or use a valid one
+        url: '/images/og-image.jpg',
         width: 1200,
         height: 630,
         alt: 'jays Taxi Moto Hero'
@@ -40,26 +41,25 @@ export const metadata: Metadata = {
   }
 };
 
-import { ThemeProvider } from '@/components/ThemeProvider';
-import { LanguageProvider } from '@/app/context/LanguageContext';
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} ${poppins.variable}`} suppressHydrationWarning>
-      <body className="font-[var(--font-inter)]">
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-PBKD8HNFDV"
-          strategy="afterInteractive"
+      <head>
+        {/* Google Analytics */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-PBKD8HNFDV" />
+        <script
+          id="google-analytics"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-PBKD8HNFDV');
+            `,
+          }}
         />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-
-            gtag('config', 'G-PBKD8HNFDV');
-          `}
-        </Script>
+      </head>
+      <body className="font-[var(--font-inter)]">
         <LanguageProvider>
           <ThemeProvider
             attribute="class"
