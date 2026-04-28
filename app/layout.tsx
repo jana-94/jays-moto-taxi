@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { Inter, Poppins } from 'next/font/google';
+import Script from 'next/script';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const poppins = Poppins({
@@ -13,12 +14,12 @@ export const metadata: Metadata = {
   title: 'jays Taxi Moto — Paris & Île-de-France',
   description:
     'Fast, reliable, and secure motorcycle taxi services in Paris and Île-de-France. Available 24/7 for your daily commute and urgent travels.',
-  metadataBase: new URL('https://jays-taxi-moto.com'),
+  metadataBase: new URL('https://mototaxi.jays-transport.fr/'),
   openGraph: {
     title: 'jays Taxi Moto — Paris & Île-de-France',
     description:
       'Fast, reliable, and secure motorcycle taxi services in Paris and Île-de-France. Available 24/7 for your daily commute and urgent travels.',
-    url: 'https://jays-taxi-moto.com',
+    url: 'https://mototaxi.jays-transport.fr/',
     siteName: 'jays Taxi Moto',
     images: [
       {
@@ -46,6 +47,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${inter.variable} ${poppins.variable}`} suppressHydrationWarning>
       <body className="font-[var(--font-inter)]">
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-PBKD8HNFDV"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-PBKD8HNFDV');
+          `}
+        </Script>
         <LanguageProvider>
           <ThemeProvider
             attribute="class"
