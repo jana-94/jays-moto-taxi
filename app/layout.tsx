@@ -3,6 +3,7 @@ import './globals.css';
 import { Inter, Poppins } from 'next/font/google';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import { LanguageProvider } from '@/app/context/LanguageContext';
+import Script from 'next/script';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const poppins = Poppins({
@@ -45,30 +46,25 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${inter.variable} ${poppins.variable}`} suppressHydrationWarning>
       <head>
-        {/* Google Tag Manager */}
-        <script
-          id="google-tag-manager"
+        {/* Google tag (gtag.js) */}
+        <Script
+          id="gtag-src"
+          src="https://www.googletagmanager.com/gtag/js?id=G-QD1D1BCRPV"
+          strategy="afterInteractive"
+        />
+        <Script
+          id="gtag-init"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
-            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-MWZ9Z3MG');`,
+            __html: `window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-QD1D1BCRPV');`,
           }}
         />
-        {/* End Google Tag Manager */}
+        {/* End Google tag (gtag.js) */}
       </head>
       <body className="font-[var(--font-inter)]">
-        {/* Google Tag Manager (noscript) */}
-        <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-MWZ9Z3MG"
-            height="0"
-            width="0"
-            style={{ display: 'none', visibility: 'hidden' }}
-          />
-        </noscript>
-        {/* End Google Tag Manager (noscript) */}
         <LanguageProvider>
           <ThemeProvider
             attribute="class"
@@ -79,6 +75,28 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             {children}
           </ThemeProvider>
         </LanguageProvider>
+
+        {/* Conversion tracking for contact form submission */}
+        <Script
+          id="contact-conversion-tracking"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `window.addEventListener('load', function() {
+  if (window.location.href.indexOf('/contact') != -1) {
+    var x = 0;
+    var myVar = setInterval(function() {
+      if (x == 0) {
+        if (document.querySelector('.text-sm.text-green-500') && document.querySelector('.text-sm.text-green-500').innerText.includes('Merci !')) {
+          gtag('event', 'conversion', {'send_to': 'AW-18123000597/ea5oCKHepKwcEJWW3MFD'});
+          clearInterval(myVar);
+          x = 1;
+        }
+      }
+    }, 1000);
+  }
+});`,
+          }}
+        />
       </body>
     </html>
   );
