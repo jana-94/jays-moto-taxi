@@ -84,20 +84,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           id="contact-conversion-tracking"
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
-            __html: `window.addEventListener('load', function() {
-  if (window.location.href.indexOf('/contact') != -1) {
-    var x = 0;
-    var myVar = setInterval(function() {
-      if (x == 0) {
-        if (document.querySelector('.text-sm.text-green-500') && document.querySelector('.text-sm.text-green-500').innerText.includes('Merci !')) {
-          gtag('event', 'conversion', {'send_to': 'AW-18123000597/ea5oCKHepKwcEJWW3MFD'});
-          clearInterval(myVar);
-          x = 1;
-        }
-      }
-    }, 1000);
-  }
-});`,
+            __html: `window.addEventListener('load', function() {if (window.location.href.indexOf('/contact') != -1) {var x = 0;var myVar = setInterval(function() {if (x == 0) {if (document.querySelector('.text-sm.text-green-500')&&document.querySelector('.text-sm.text-green-500').innerText.includes('Merci !')) {gtag('event', 'conversion', {'send_to': 'AW-18123000597/ea5oCKHepKwcEJWW3MFD'});clearInterval(myVar);x = 1;}}}, 1000);}});`,
           }}
         />
       </body>
