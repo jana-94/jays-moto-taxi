@@ -17,6 +17,11 @@ export const metadata: Metadata = {
   description:
     'Fast, reliable, and secure motorcycle taxi services in Paris and Île-de-France. Available 24/7 for your daily commute and urgent travels.',
   metadataBase: new URL('https://jays-taxi-moto.com'),
+  icons: {
+    icon: '/images/logo/logonew3.png',
+    shortcut: '/images/logo/logonew3.png',
+    apple: '/images/logo/logonew3.png',
+  },
   openGraph: {
     title: 'jays Taxi Moto — Paris & Île-de-France',
     description:
