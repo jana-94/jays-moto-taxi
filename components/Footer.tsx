@@ -4,6 +4,7 @@ import Link from 'next/link';
 import './footer.css';
 import Image from 'next/image';
 import { useLanguage } from '@/app/context/LanguageContext';
+import { FaLinkedin, FaInstagram, FaYoutube } from 'react-icons/fa';
 
 const Footer = () => {
   const { t } = useLanguage();
@@ -24,20 +25,17 @@ const Footer = () => {
             {t('nav.slogan')}
           </span> */}
         </Link>
-        {/* <div className='social'>
-          <Link href='/' className='social-icon-outer'>
-            <img className='social-icon' src='/img/fb.svg' alt='facebook' />
-          </Link>
-          <Link href='/' className='social-icon-outer'>
-            <img className='social-icon' src='/img/tw.svg' alt='twitter' />
-          </Link>
-          <Link href='/' className='social-icon-outer'>
-            <img className='social-icon' src='/img/instagram.svg' alt='instagram' />
-          </Link>
-          <Link href='/' className='social-icon-outer'>
-            <img className='social-icon' src='/img/linkedin.svg' alt='linkedin' />
-          </Link>
-        </div> */}
+        <div className='social flex gap-3'>
+          <a href='https://www.linkedin.com/in/jay-nagesh-01a47b44/' target='_blank' rel='noopener noreferrer' className='social-icon-outer text-white hover:text-brand transition-colors' aria-label="LinkedIn">
+            <FaLinkedin className='w-4 h-4' />
+          </a>
+          <a href='https://www.instagram.com/JAY_NAG91/' target='_blank' rel='noopener noreferrer' className='social-icon-outer text-white hover:text-brand transition-colors' aria-label="Instagram">
+            <FaInstagram className='w-4 h-4' />
+          </a>
+          <a href='https://www.youtube.com/@Mototaxi.Jays-Transport_Paris' target='_blank' rel='noopener noreferrer' className='social-icon-outer text-white hover:text-brand transition-colors' aria-label="YouTube">
+            <FaYoutube className='w-4 h-4' />
+          </a>
+        </div>
         <Link
           href={`https://www.google.com/maps?q=${encodedAddress}`}
           target="_blank"
