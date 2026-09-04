@@ -157,18 +157,12 @@ function ReservationContent() {
     }
   }, [searchParams]);
 
-  // Add this helper
-function formatDateDisplay(dateStr: string): string {
-  if (!dateStr) return '';
-  const [year, month, day] = dateStr.split('-');
-  return `${day}/${month}/${year}`; // Always DD/MM/YYYY
-}
-
-// In your ReadonlyField for date (Step 2):
-<ReadonlyField 
-  label={t('reservation.date_pickup')} 
-  value={formatDateDisplay(date)}  // ✅ consistent display
-/>
+  // Helper to format date display as DD/MM/YYYY
+  const formatDateDisplay = (dateStr: string): string => {
+    if (!dateStr) return '';
+    const [year, month, day] = dateStr.split('-');
+    return `${day}/${month}/${year}`;
+  };
 
   // Route update callbacks (memoised to avoid re-render loops in RouteMap)
   const handleOriginSelected = useCallback(
@@ -637,7 +631,7 @@ function formatDateDisplay(dateStr: string): string {
                     {/* Pre-filled read-only fields */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <ReadonlyField label={t('reservation.service_type')} value={tripType === 'round-trip' ? t('reservation.round_trip_label') : t('reservation.single_trip')} />
-                      <ReadonlyField label={t('reservation.date_pickup')} value={date} />
+                      <ReadonlyField label={t('reservation.date_pickup')} value={formatDateDisplay(date)} />
                       <ReadonlyField label={t('reservation.time_pickup')} value={time} />
                       <ReadonlyField label={t('reservation.luggage_count')} value={String(luggage)} />
                     </div>

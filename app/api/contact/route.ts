@@ -93,17 +93,34 @@ export async function POST(request: NextRequest) {
     // 2️⃣ Prepare User Content
     let userContent = '';
     if (isBooking) {
+      const detailsArray = (bookingDetails as string).split('\n');
       userContent = `
-        <p>Hi ${name},</p>
-        <p>Thank you for choosing Jay's Taxi Moto. We have received your booking request and our team will contact you shortly to confirm.</p>
+        <p>Hi <strong>${name}</strong>,</p>
+        <p>Thank you for choosing <strong>Jay's Taxi Moto</strong>. We have received your booking request and our dispatch team is reviewing it. We will contact you shortly to confirm your ride.</p>
+        
+        <h3 style="color: #111827; border-bottom: 2px solid ${brandColor}; padding-bottom: 8px; margin-top: 25px; font-size: 16px;">Booking Summary</h3>
+        <table class="details-table">
+          ${detailsArray.map(line => {
+            const [label, ...valParts] = line.split(': ');
+            if (!label || valParts.length === 0) return '';
+            return `<tr><th>${label}</th><td>${valParts.join(': ')}</td></tr>`;
+          }).join('')}
+        </table>
+        
+        <div style="background-color: #fefce8; border-left: 4px solid ${brandColor}; padding: 12px 16px; margin-top: 20px; font-size: 13px; color: #854d0e; border-radius: 4px;">
+          <strong>Important:</strong> The fare indicated is an estimate. Final confirmation and driver details will be sent via SMS / phone prior to your pick-up time.
+        </div>
+
+        <p style="margin-top: 25px;">If you have any questions or need immediate assistance, please reply directly to this email or contact our 24/7 dispatch.</p>
+        <p style="margin-top: 15px; font-weight: 500;">Best regards,<br><strong>The Jay's Taxi Moto Team</strong></p>
       `;
     } else {
       userContent = `
-        <p>Hi ${name},</p>
-        <p>Thank you for reaching out to Jay's Taxi Moto. We have received your message and one of our team members will get back to you as soon as possible.</p>
+        <p>Hi <strong>${name}</strong>,</p>
+        <p>Thank you for reaching out to <strong>Jay's Taxi Moto</strong>. We have received your message and one of our team members will get back to you as soon as possible.</p>
         <p><strong>Your message:</strong></p>
         <div class="message-box">"${message}"</div>
-        <p style="margin-top: 20px;">Best regards,<br>The Jay's Taxi Moto Team</p>
+        <p style="margin-top: 20px;">Best regards,<br><strong>The Jay's Taxi Moto Team</strong></p>
       `;
     }
 
