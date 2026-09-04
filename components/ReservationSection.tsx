@@ -164,6 +164,19 @@ function ReservationContent() {
     return `${day}/${month}/${year}`;
   };
 
+  // Helper to format time display with AM/PM (e.g. 11:00 AM, 02:30 PM)
+  const formatTimeDisplay = (timeStr: string): string => {
+    if (!timeStr) return '';
+    if (/am|pm/i.test(timeStr)) return timeStr;
+    const [hourStr, minuteStr] = timeStr.trim().split(':');
+    const hour = parseInt(hourStr, 10);
+    if (isNaN(hour)) return timeStr;
+    const ampm = hour >= 12 ? 'PM' : 'AM';
+    const hour12 = hour % 12 === 0 ? 12 : hour % 12;
+    const formattedHour = hour12.toString().padStart(2, '0');
+    return `${formattedHour}:${minuteStr} ${ampm}`;
+  };
+
   // Route update callbacks (memoised to avoid re-render loops in RouteMap)
   const handleOriginSelected = useCallback(
     (place: google.maps.places.PlaceResult) => {
@@ -306,8 +319,8 @@ function ReservationContent() {
       `Type of Service: ${tripType === 'round-trip' ? 'Round Trip' : 'Single Trip'}`,
       `Start Address: ${originText}`,
       `End Address: ${destinationText}`,
-      `Date of Pick-up: ${date}`,
-      `Time of Pick-up: ${time}`,
+      `Date of Pick-up: ${formatDateDisplay(date)}`,
+      `Time of Pick-up: ${formatTimeDisplay(time)}`,
       `No. of Luggage: ${luggage}`,
       routeInfo ? `Distance: ${routeInfo.distance}` : '',
       routeInfo ? `Estimated Duration: ${routeInfo.duration}` : '',
@@ -632,7 +645,7 @@ function ReservationContent() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <ReadonlyField label={t('reservation.service_type')} value={tripType === 'round-trip' ? t('reservation.round_trip_label') : t('reservation.single_trip')} />
                       <ReadonlyField label={t('reservation.date_pickup')} value={formatDateDisplay(date)} />
-                      <ReadonlyField label={t('reservation.time_pickup')} value={time} />
+                      <ReadonlyField label={t('reservation.time_pickup')} value={formatTimeDisplay(time)} />
                       <ReadonlyField label={t('reservation.luggage_count')} value={String(luggage)} />
                     </div>
                     <ReadonlyField label={t('reservation.labels.start_address')} value={originText} />

@@ -58,6 +58,21 @@ export async function POST(request: NextRequest) {
       </html>
     `;
 
+    const formatTimeValue = (val: string): string => {
+      if (!val) return val;
+      if (/am|pm/i.test(val)) return val;
+      const match = val.trim().match(/^([01]?[0-9]|2[0-3]):([0-5][0-9])$/);
+      if (match) {
+        const hour = parseInt(match[1], 10);
+        const minute = match[2];
+        const ampm = hour >= 12 ? 'PM' : 'AM';
+        const hour12 = hour % 12 === 0 ? 12 : hour % 12;
+        const formattedHour = hour12.toString().padStart(2, '0');
+        return `${formattedHour}:${minute} ${ampm}`;
+      }
+      return val;
+    };
+
     // 1️⃣ Prepare Admin Content
     let adminContent = '';
     if (isBooking) {
@@ -70,7 +85,11 @@ export async function POST(request: NextRequest) {
           ${detailsArray.map(line => {
             const [label, ...valParts] = line.split(': ');
             if (!label || valParts.length === 0) return '';
-            return `<tr><th>${label}</th><td>${valParts.join(': ')}</td></tr>`;
+            let val = valParts.join(': ');
+            if (label.toLowerCase().includes('time')) {
+              val = formatTimeValue(val);
+            }
+            return `<tr><th>${label}</th><td>${val}</td></tr>`;
           }).join('')}
         </table>
       `;
@@ -103,7 +122,11 @@ export async function POST(request: NextRequest) {
           ${detailsArray.map(line => {
             const [label, ...valParts] = line.split(': ');
             if (!label || valParts.length === 0) return '';
-            return `<tr><th>${label}</th><td>${valParts.join(': ')}</td></tr>`;
+            let val = valParts.join(': ');
+            if (label.toLowerCase().includes('time')) {
+              val = formatTimeValue(val);
+            }
+            return `<tr><th>${label}</th><td>${val}</td></tr>`;
           }).join('')}
         </table>
         
