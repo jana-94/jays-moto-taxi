@@ -56,7 +56,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           id="gtm-script"
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
-            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-MWZ9Z3MG');`,
+            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);};(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-MWZ9Z3MG');`,
           }}
         />
         {/* End Google Tag Manager */}
@@ -83,15 +83,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {children}
           </ThemeProvider>
         </LanguageProvider>
-
-        {/* Conversion tracking for contact form submission */}
-        <Script
-          id="contact-conversion-tracking"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `window.addEventListener('load', function() {if (window.location.href.indexOf('/contact') != -1) {var x = 0;var myVar = setInterval(function() {if (x == 0) {if (document.querySelector('.text-sm.text-green-500')&&document.querySelector('.text-sm.text-green-500').innerText.includes('Merci !')) {gtag('event', 'conversion', {'send_to': 'AW-18123000597/ea5oCKHepKwcEJWW3MFD'});clearInterval(myVar);x = 1;}}}, 1000);}});`,
-          }}
-        />
       </body>
     </html>
   );

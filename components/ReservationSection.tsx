@@ -339,6 +339,70 @@ function ReservationContent() {
         body: JSON.stringify({ name, email, type: 'booking', bookingDetails }),
       });
       if (!res.ok) throw new Error('Failed');
+
+      // User-Provided Data Tracking for Google Tag Manager, GA4 & Google Ads
+      if (typeof window !== 'undefined') {
+        const submittedName = (name || '').trim();
+        const submittedEmail = (email || '').trim();
+        const submittedMobile = (mobile || '').trim();
+
+        const nameParts = submittedName.split(/\s+/);
+        const firstName = nameParts[0] || '';
+        const lastName = nameParts.slice(1).join(' ') || '';
+
+        window.dataLayer = window.dataLayer || [];
+
+        // 1. Primary DataLayer event with user_data & user_provided_data
+        window.dataLayer.push({
+          event: 'booking_form_submission',
+          form_id: 'reservation-form',
+          form_name: 'Moto Taxi Reservation Form',
+          trip_type: tripType,
+          pickup_address: originText,
+          dropoff_address: destinationText,
+          pickup_date: date,
+          pickup_time: time,
+          luggage: luggage,
+          distance: routeInfo?.distance || '',
+          estimated_fare: estimatedFare || 0,
+          currency: 'EUR',
+          user_data: {
+            email: submittedEmail,
+            phone_number: submittedMobile,
+            address: {
+              first_name: firstName,
+              last_name: lastName,
+            },
+          },
+          user_provided_data: {
+            email: submittedEmail,
+            phone_number: submittedMobile,
+            name: submittedName,
+            first_name: firstName,
+            last_name: lastName,
+          },
+          customer_name: submittedName,
+          customer_email: submittedEmail,
+          customer_phone: submittedMobile,
+        });
+
+        // 2. Standard GA4 generate_lead / booking event
+        window.dataLayer.push({
+          event: 'generate_lead',
+          lead_type: 'booking',
+          currency: 'EUR',
+          value: estimatedFare || 0,
+          user_data: {
+            email: submittedEmail,
+            phone_number: submittedMobile,
+            address: {
+              first_name: firstName,
+              last_name: lastName,
+            },
+          },
+        });
+      }
+
       setBookingStatus('success');
     } catch {
       setBookingStatus('error');

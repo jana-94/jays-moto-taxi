@@ -56,4 +56,6 @@ declare namespace google.maps {
 
 interface Window {
     google: any;
+    dataLayer: any[];
+    gtag?: (...args: any[]) => void;
 }
