@@ -26,6 +26,7 @@ export default function BookingSection() {
         <section id="book-your-motorcycle" className="section bg-card py-20 overflow-hidden">
             <Script
                 src={`https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`}
+                strategy="afterInteractive"
                 onLoad={() => setIsLoaded(true)}
             />
 

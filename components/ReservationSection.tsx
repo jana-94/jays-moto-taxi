@@ -98,8 +98,19 @@ function ReservationContent() {
 
   // Google Maps load state
   const [isMapLoaded, setIsMapLoaded] = useState(
-    () => typeof window !== 'undefined' && typeof window.google !== 'undefined'
+    () => typeof window !== 'undefined' && typeof window.google?.maps?.places !== 'undefined'
   );
+
+  useEffect(() => {
+    if (isMapLoaded) return;
+    const interval = setInterval(() => {
+      if (typeof window !== 'undefined' && window.google?.maps?.places) {
+        setIsMapLoaded(true);
+        clearInterval(interval);
+      }
+    }, 200);
+    return () => clearInterval(interval);
+  }, [isMapLoaded]);
 
   const today = new Date().toLocaleDateString('en-CA'); // YYYY-MM-DD in local time
 
@@ -276,8 +287,8 @@ function ReservationContent() {
   };
 
   // Step 1 → Fare Estimate
-  const handleEstimate = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleEstimate = (e?: React.SyntheticEvent) => {
+    if (e) e.preventDefault();
     if (!routeInfo) return;
 
     // Check for fixed fare override
@@ -303,6 +314,15 @@ function ReservationContent() {
 
     setEstimatedFare(finalFare);
     setFareCalculated(true);
+  };
+
+  const handleStep1KeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      if (canEstimate && !fareCalculated) {
+        handleEstimate();
+      }
+    }
   };
 
   // Transition to Step 2
@@ -401,6 +421,18 @@ function ReservationContent() {
             },
           },
         });
+
+        // 3. Programmatic User-Provided Data for Google Ads Enhanced Conversions
+        if (typeof window.gtag === 'function') {
+          window.gtag('set', 'user_data', {
+            email: submittedEmail,
+            phone_number: submittedMobile,
+            address: {
+              first_name: firstName,
+              last_name: lastName,
+            },
+          });
+        }
       }
 
       setBookingStatus('success');
@@ -414,11 +446,11 @@ function ReservationContent() {
 
   return (
     <section className="section bg-base py-0">
-     <Script
-  src={`https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`}
-  strategy="afterInteractive"
-  onLoad={() => setIsMapLoaded(true)}
-/>
+      <Script
+        src={`https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`}
+        strategy="afterInteractive"
+        onLoad={() => setIsMapLoaded(true)}
+      />
 
       <div className="container max-w-6xl mx-auto shadow-2xl rounded-2xl overflow-hidden my-6 md:my-12 bg-card border border-card">
         <div className="flex flex-col lg:flex-row min-h-[600px]">
@@ -490,177 +522,179 @@ function ReservationContent() {
                   {/* Form + Map stacked, parent scrolls */}
                   <div className="flex flex-col">
 
-                    {/* Form */}
-                    <div className="px-6 md:px-10 py-5 space-y-4">
-                      <form onSubmit={handleEstimate} className="space-y-4">
+                    {/* Step 1 Interactive Estimator Controls (not a premature form submit) */}
+                    <div onKeyDown={handleStep1KeyDown} className="px-6 md:px-10 py-5 space-y-4">
 
-                        {/* Trip Type */}
-                        <div className="flex justify-center gap-6">
-                          {(['single', 'round-trip'] as const).map((type) => (
-                            <label key={type} className="flex items-center gap-2 cursor-pointer group">
-                              <div
-                                className={`w-4 h-4 rounded-full border-2 flex items-center justify-center transition-colors ${tripType === type ? 'border-brand' : 'border-base-border'
-                                  }`}
-                              >
-                                {tripType === type && <div className="w-2 h-2 rounded-full bg-brand" />}
-                              </div>
-                              <input
-                                type="radio"
-                                name="tripType"
-                                className="hidden"
-                                checked={tripType === type}
-                                onChange={() => handleTripTypeChange(type)}
-                              />
-                              <span className="text-sm text-ink-softer group-hover:text-ink transition-colors capitalize">
-                                {type === 'single' ? t('reservation.labels.one_way') : t('reservation.labels.round_trip')}
-                              </span>
-                            </label>
-                          ))}
-                        </div>
-
-                        {/* Addresses */}
-                        {isMapLoaded && (
-                          <>
-                            <LocationInput
-                              label={t('reservation.labels.start_address')}
-                              placeholder={t('reservation.placeholders.location')}
-                              onPlaceSelected={handleOriginSelected}
-                              onValueChange={setOriginText}
-                              value={originText}
-                            />
-                            <LocationInput
-                              label={t('reservation.labels.end_address')}
-                              placeholder={t('reservation.placeholders.location')}
-                              onPlaceSelected={handleDestinationSelected}
-                              onValueChange={setDestinationText}
-                              value={destinationText}
-                            />
-                          </>
-                        )}
-                        {!isMapLoaded && (
-                          <div className="space-y-3">
-                            <div className="h-12 rounded border border-base-border bg-base-light animate-pulse" />
-                            <div className="h-12 rounded border border-base-border bg-base-light animate-pulse" />
-                          </div>
-                        )}
-
-                        {/* Date & Time */}
-                        <div className="grid grid-cols-2 gap-4">
-                          <div className="space-y-1">
-                            <label className="text-sm font-bold text-ink">{t('reservation.labels.date_time').split(' ')[0] || t('reservation.date_pickup')}</label>
-                            <div className="relative">
-                              <div className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-softer">
-                                <FiCalendar size={14} />
-                              </div>
-                              <input
-                                type="date"
-                                value={date}
-                                onChange={(e) => setDate(e.target.value)}
-                                min={today}
-                                required
-                                className="w-full pl-9 pr-3 py-3 rounded border border-base-border bg-base focus:border-brand focus:ring-1 focus:ring-brand outline-none text-sm text-ink"
-                              />
-                            </div>
-                          </div>
-                          <div className="space-y-1">
-                            <label className="text-sm font-bold text-ink">{t('reservation.time_label')}</label>
-                            <div className="relative">
-                              <div className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-softer">
-                                <FiClock size={14} />
-                              </div>
-                              <input
-                                type="time"
-                                value={time}
-                                onChange={(e) => setTime(e.target.value)}
-                                required
-                                className="w-full pl-9 pr-3 py-3 rounded border border-base-border bg-base focus:border-brand focus:ring-1 focus:ring-brand outline-none text-sm text-ink"
-                              />
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Luggage — max 1 */}
-                        <div className="space-y-1">
-                          <label className="text-sm font-bold text-ink block">
-                            {t('reservation.labels.luggage')}
-                            <span className="ml-1 text-xs font-normal text-ink-softer">(max 1)</span>
-                          </label>
-                          <div className="flex items-center gap-3">
-                            <label className="flex items-center gap-2 cursor-pointer">
-                              <div
-                                className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-colors ${luggage === 0 ? 'border-brand bg-brand/10' : 'border-base-border'
-                                  }`}
-                                onClick={() => handleLuggageChange(0)}
-                              >
-                                {luggage === 0 && <div className="w-2.5 h-2.5 rounded-sm bg-brand" />}
-                              </div>
-                              <FiBriefcase size={14} className="text-ink-softer" />
-                              <span className="text-sm text-ink">0</span>
-                            </label>
-                            <label className="flex items-center gap-2 cursor-pointer">
-                              <div
-                                className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-colors ${luggage === 1 ? 'border-brand bg-brand/10' : 'border-base-border'
-                                  }`}
-                                onClick={() => handleLuggageChange(1)}
-                              >
-                                {luggage === 1 && <div className="w-2.5 h-2.5 rounded-sm bg-brand" />}
-                              </div>
-                              <FiBriefcase size={14} className="text-ink-softer" />
-                              <span className="text-sm text-ink">1</span>
-                            </label>
-                          </div>
-                        </div>
-
-                        {/* Fare Disclaimer */}
-                        
-                          <div className="bg-brand/10 border border-brand/20 rounded-lg px-4 py-3">
-                            <p className="text-xs text-brand font-medium italic text-center">
-                              {t('reservation.fare_disclaimer')}
-                            </p>
-                          </div>
-                        
-
-                        {/* Estimated Fare badge */}
-                        <AnimatePresence>
-                          {fareCalculated && estimatedFare !== null && (
-                            <motion.div
-                              key="fare"
-                              initial={{ opacity: 0, scale: 0.9 }}
-                              animate={{ opacity: 1, scale: 1 }}
-                              exit={{ opacity: 0, scale: 0.9 }}
-                              className="bg-brand/10 border border-brand/30 rounded-xl p-4 text-center"
+                      {/* Trip Type */}
+                      <div className="flex justify-center gap-6">
+                        {(['single', 'round-trip'] as const).map((type) => (
+                          <label key={type} className="flex items-center gap-2 cursor-pointer group">
+                            <div
+                              className={`w-4 h-4 rounded-full border-2 flex items-center justify-center transition-colors ${tripType === type ? 'border-brand' : 'border-base-border'
+                                }`}
                             >
-                              <p className="text-xs text-ink-softer uppercase tracking-wide mb-1">{t('reservation.estimated_fare')}</p>
-                              <p className="text-3xl font-black text-brand">€{estimatedFare}</p>
-                              {/* <p className="text-xs text-ink-softer mt-1">
-                                Base €25 + {parseKm(routeInfo?.distance || '0 km').toFixed(1)} km × €2.5
-                                {luggage > 0 ? t('reservation.fare_luggage') : ''}
-                                {tripType === 'round-trip' ? t('reservation.fare_round_trip') : ''}
-                              </p> */}
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
+                              {tripType === type && <div className="w-2 h-2 rounded-full bg-brand" />}
+                            </div>
+                            <input
+                              type="radio"
+                              name="tripType"
+                              className="hidden"
+                              checked={tripType === type}
+                              onChange={() => handleTripTypeChange(type)}
+                            />
+                            <span className="text-sm text-ink-softer group-hover:text-ink transition-colors capitalize">
+                              {type === 'single' ? t('reservation.labels.one_way') : t('reservation.labels.round_trip')}
+                            </span>
+                          </label>
+                        ))}
+                      </div>
 
-                        {/* CTA Button */}
-                        {!fareCalculated ? (
-                          <button
-                            type="submit"
-                            disabled={!canEstimate}
-                            className="w-full bg-brand hover:bg-brand-dark disabled:opacity-40 disabled:cursor-not-allowed text-black font-bold py-4 rounded shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5"
+                      {/* Addresses */}
+                      {isMapLoaded && (
+                        <>
+                          <LocationInput
+                            id="reservation-pickup"
+                            name="pickup_address"
+                            label={t('reservation.labels.start_address')}
+                            placeholder={t('reservation.placeholders.location')}
+                            onPlaceSelected={handleOriginSelected}
+                            onValueChange={setOriginText}
+                            value={originText}
+                          />
+                          <LocationInput
+                            id="reservation-dropoff"
+                            name="dropoff_address"
+                            label={t('reservation.labels.end_address')}
+                            placeholder={t('reservation.placeholders.location')}
+                            onPlaceSelected={handleDestinationSelected}
+                            onValueChange={setDestinationText}
+                            value={destinationText}
+                          />
+                        </>
+                      )}
+                      {!isMapLoaded && (
+                        <div className="space-y-3">
+                          <div className="h-12 rounded border border-base-border bg-base-light animate-pulse" />
+                          <div className="h-12 rounded border border-base-border bg-base-light animate-pulse" />
+                        </div>
+                      )}
+
+                      {/* Date & Time */}
+                      <div className="grid grid-cols-2 gap-4">
+                        <div className="space-y-1">
+                          <label htmlFor="reservation-date" className="text-sm font-bold text-ink">{t('reservation.labels.date_time').split(' ')[0] || t('reservation.date_pickup')}</label>
+                          <div className="relative">
+                            <div className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-softer">
+                              <FiCalendar size={14} />
+                            </div>
+                            <input
+                              id="reservation-date"
+                              name="pickup_date"
+                              type="date"
+                              value={date}
+                              onChange={(e) => setDate(e.target.value)}
+                              min={today}
+                              required
+                              className="w-full pl-9 pr-3 py-3 rounded border border-base-border bg-base focus:border-brand focus:ring-1 focus:ring-brand outline-none text-sm text-ink"
+                            />
+                          </div>
+                        </div>
+                        <div className="space-y-1">
+                          <label htmlFor="reservation-time" className="text-sm font-bold text-ink">{t('reservation.time_label')}</label>
+                          <div className="relative">
+                            <div className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-softer">
+                              <FiClock size={14} />
+                            </div>
+                            <input
+                              id="reservation-time"
+                              name="pickup_time"
+                              type="time"
+                              value={time}
+                              onChange={(e) => setTime(e.target.value)}
+                              required
+                              className="w-full pl-9 pr-3 py-3 rounded border border-base-border bg-base focus:border-brand focus:ring-1 focus:ring-brand outline-none text-sm text-ink"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Luggage — max 1 */}
+                      <div className="space-y-1">
+                        <label className="text-sm font-bold text-ink block">
+                          {t('reservation.labels.luggage')}
+                          <span className="ml-1 text-xs font-normal text-ink-softer">(max 1)</span>
+                        </label>
+                        <div className="flex items-center gap-3">
+                          <label className="flex items-center gap-2 cursor-pointer">
+                            <div
+                              className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-colors ${luggage === 0 ? 'border-brand bg-brand/10' : 'border-base-border'
+                                }`}
+                              onClick={() => handleLuggageChange(0)}
+                            >
+                              {luggage === 0 && <div className="w-2.5 h-2.5 rounded-sm bg-brand" />}
+                            </div>
+                            <FiBriefcase size={14} className="text-ink-softer" />
+                            <span className="text-sm text-ink">0</span>
+                          </label>
+                          <label className="flex items-center gap-2 cursor-pointer">
+                            <div
+                              className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-colors ${luggage === 1 ? 'border-brand bg-brand/10' : 'border-base-border'
+                                }`}
+                              onClick={() => handleLuggageChange(1)}
+                            >
+                              {luggage === 1 && <div className="w-2.5 h-2.5 rounded-sm bg-brand" />}
+                            </div>
+                            <FiBriefcase size={14} className="text-ink-softer" />
+                            <span className="text-sm text-ink">1</span>
+                          </label>
+                        </div>
+                      </div>
+
+                      {/* Fare Disclaimer */}
+                      <div className="bg-brand/10 border border-brand/20 rounded-lg px-4 py-3">
+                        <p className="text-xs text-brand font-medium italic text-center">
+                          {t('reservation.fare_disclaimer')}
+                        </p>
+                      </div>
+
+                      {/* Estimated Fare badge */}
+                      <AnimatePresence>
+                        {fareCalculated && estimatedFare !== null && (
+                          <motion.div
+                            key="fare"
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.9 }}
+                            className="bg-brand/10 border border-brand/30 rounded-xl p-4 text-center"
                           >
-                            {t('reservation.submit')}
-                          </button>
-                        ) : (
-                          <button
-                            type="button"
-                            onClick={handleGoToBooking}
-                            disabled={!date || !time}
-                            className="w-full bg-brand hover:bg-brand-dark disabled:opacity-40 disabled:cursor-not-allowed text-black font-bold py-4 rounded shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-2"
-                          >
-                            {t('reservation.book_now')} <FiArrowRight size={16} />
-                          </button>
+                            <p className="text-xs text-ink-softer uppercase tracking-wide mb-1">{t('reservation.estimated_fare')}</p>
+                            <p className="text-3xl font-black text-brand">€{estimatedFare}</p>
+                          </motion.div>
                         )}
-                      </form>
+                      </AnimatePresence>
+
+                      {/* CTA Button */}
+                      {!fareCalculated ? (
+                        <button
+                          type="button"
+                          onClick={() => handleEstimate()}
+                          disabled={!canEstimate}
+                          id="reservation-estimate-btn"
+                          className="w-full bg-brand hover:bg-brand-dark disabled:opacity-40 disabled:cursor-not-allowed text-black font-bold py-4 rounded shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5"
+                        >
+                          {t('reservation.submit')}
+                        </button>
+                      ) : (
+                        <button
+                          type="button"
+                          onClick={handleGoToBooking}
+                          disabled={!date || !time}
+                          id="reservation-book-now-btn"
+                          className="w-full bg-brand hover:bg-brand-dark disabled:opacity-40 disabled:cursor-not-allowed text-black font-bold py-4 rounded shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-2"
+                        >
+                          {t('reservation.book_now')} <FiArrowRight size={16} />
+                        </button>
+                      )}
                     </div>
 
                     {/* Map — tall, scrollable into view */}
@@ -694,6 +728,7 @@ function ReservationContent() {
                 >
                   <div className="px-6 md:px-10 pt-8 pb-4 border-b border-base-border">
                     <button
+                      type="button"
                       onClick={() => { setStep(1); setBookingStatus('idle'); }}
                       className="text-xs text-ink-softer hover:text-brand transition-colors mb-3 flex items-center gap-1"
                     >
@@ -703,7 +738,12 @@ function ReservationContent() {
                     <p className="text-xs text-ink-softer mt-1">{t('reservation.step2_subtitle')}</p>
                   </div>
 
-                  <form onSubmit={handleBookNow} className="px-6 md:px-10 py-6 space-y-4 flex-1">
+                  <form
+                    id="reservation-form"
+                    name="reservation-form"
+                    onSubmit={handleBookNow}
+                    className="px-6 md:px-10 py-6 space-y-4 flex-1"
+                  >
 
                     {/* Pre-filled read-only fields */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -719,11 +759,14 @@ function ReservationContent() {
 
                       {/* Name */}
                       <div className="space-y-1">
-                        <label className="text-sm font-bold text-ink flex items-center gap-1">
+                        <label htmlFor="reservation-name" className="text-sm font-bold text-ink flex items-center gap-1">
                           <FiUser size={13} /> {t('reservation.your_name')} <span className="text-brand">*</span>
                         </label>
                         <input
+                          id="reservation-name"
+                          name="name"
                           type="text"
+                          autoComplete="name"
                           value={name}
                           onChange={(e) => setName(e.target.value)}
                           placeholder={t('reservation.your_name_placeholder')}
@@ -734,11 +777,14 @@ function ReservationContent() {
 
                       {/* Email */}
                       <div className="space-y-1">
-                        <label className="text-sm font-bold text-ink flex items-center gap-1">
+                        <label htmlFor="reservation-email" className="text-sm font-bold text-ink flex items-center gap-1">
                           <FiMail size={13} /> {t('reservation.email_address')} <span className="text-brand">*</span>
                         </label>
                         <input
+                          id="reservation-email"
+                          name="email"
                           type="email"
+                          autoComplete="email"
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           placeholder={t('reservation.email_placeholder')}
@@ -749,11 +795,14 @@ function ReservationContent() {
 
                       {/* Mobile */}
                       <div className="space-y-1">
-                        <label className="text-sm font-bold text-ink flex items-center gap-1">
+                        <label htmlFor="reservation-phone" className="text-sm font-bold text-ink flex items-center gap-1">
                           <FiPhone size={13} /> {t('reservation.mobile_number')} <span className="text-brand">*</span>
                         </label>
                         <input
+                          id="reservation-phone"
+                          name="phone"
                           type="tel"
+                          autoComplete="tel"
                           value={mobile}
                           onChange={(e) => setMobile(e.target.value)}
                           placeholder={t('reservation.mobile_placeholder')}
@@ -764,10 +813,12 @@ function ReservationContent() {
 
                       {/* Description */}
                       <div className="space-y-1">
-                        <label className="text-sm font-bold text-ink flex items-center gap-1">
+                        <label htmlFor="reservation-description" className="text-sm font-bold text-ink flex items-center gap-1">
                           <FiMessageSquare size={13} /> {t('reservation.description')}
                         </label>
                         <textarea
+                          id="reservation-description"
+                          name="description"
                           value={description}
                           onChange={(e) => setDescription(e.target.value)}
                           placeholder={t('reservation.description_placeholder')}
@@ -781,6 +832,7 @@ function ReservationContent() {
                     <AnimatePresence>
                       {bookingStatus === 'success' && (
                         <motion.div
+                          id="reservation-success-msg"
                           initial={{ opacity: 0, y: -6 }}
                           animate={{ opacity: 1, y: 0 }}
                           className="flex items-center gap-2 bg-green-500/10 border border-green-500/30 rounded-lg px-4 py-3 text-sm text-green-600"
@@ -791,6 +843,7 @@ function ReservationContent() {
                       )}
                       {bookingStatus === 'error' && (
                         <motion.div
+                          id="reservation-error-msg"
                           initial={{ opacity: 0, y: -6 }}
                           animate={{ opacity: 1, y: 0 }}
                           className="bg-red-500/10 border border-red-500/30 rounded-lg px-4 py-3 text-sm text-red-500"
@@ -802,6 +855,7 @@ function ReservationContent() {
 
                     {/* Submit */}
                     <button
+                      id="reservation-submit-btn"
                       type="submit"
                       disabled={!canSubmitBooking || bookingStatus === 'loading' || bookingStatus === 'success'}
                       className="w-full bg-brand hover:bg-brand-dark disabled:opacity-40 disabled:cursor-not-allowed text-black font-bold py-4 rounded shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-2"
