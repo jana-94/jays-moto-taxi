@@ -43,16 +43,16 @@ export default function LocationInput({
             // Ensure Google Maps Places API is fully loaded
             if (typeof window !== 'undefined' && window.google?.maps?.places?.Autocomplete) {
                 try {
-                    autoCompleteRef.current = new window.google.maps.places.Autocomplete(inputRef.current, {
+                    const autocompleteInstance = new window.google.maps.places.Autocomplete(inputRef.current, {
                         types: ['establishment', 'geocode'],
                         componentRestrictions: { country: 'fr' },
                         fields: ['formatted_address', 'geometry', 'name', 'place_id'],
                     });
 
-                    autoCompleteRef.current.addListener('place_changed', () => {
-                        const autocomplete = autoCompleteRef.current;
-                        if (!autocomplete) return;
-                        const place = autocomplete.getPlace() as google.maps.places.PlaceResult & { name?: string };
+                    autoCompleteRef.current = autocompleteInstance;
+
+                    autocompleteInstance.addListener('place_changed', () => {
+                        const place = autocompleteInstance.getPlace() as google.maps.places.PlaceResult & { name?: string };
                         if (place) {
                             const displayValue = place.name
                                 ? `${place.name}, ${place.formatted_address}`
